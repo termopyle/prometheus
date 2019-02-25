@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	 
+<mapper namespace="org.kobic.omics.archive.mapper.TaxonomyMapper">
+
+	<!-- resultMap -->
+	<resultMap id="TaxonomyListMap" type="org.kobic.omics.archive.vo.TaxonomyVo">
+		<result property="tax_id"			column="tax_id" 		/>
+		<result property="parent_tax_id"	column="parent_tax_id"	/>
+		<result property="rank"				column="rank"			/>
+		<result property="name_txt"			column="name_txt"		/>
+		<result property="end_yn"			column="end_yn"			/>
+		<result property="leaf_node"		column="leaf_node"		/>
+	</resultMap>
+
+	<resultMap id="TaxonomyLineageMap" type="org.kobic.omics.archive.vo.LineageVo">
+		<result property="tax_id"			column="tax_id" 		/>
+		<result property="parent_tax_id"	column="parent_tax_id"	/>
+		<result property="rank"				column="rank"			/>
+		<result property="name_txt"			column="name_txt"		/>
+		<result property="lineage"			column="lineage"		/>
+		<result property="end_yn"			column="end_yn"			/>
+		<result property="leaf_node"		column="leaf_node"		/>
+	</resultMap>
+	
+<!-- NCBI의 분류체계에서 현재 선택한 tax_id의 child를 반환해주는 쿼리 -->
+ 	<select id="getTaxonNodes"  parameterType="String" resultMap="TaxonomyListMap" >
+ 	 	SELECT
+			tax_id, parent_tax_id, rank, name_txt, end_yn, leaf_node
+		FROM (
+			SELECT
+				A.tax_id
+				, A.parent_tax_id
+				, A.rank
+				, B.name_txt
+				, end_yn
+				, leaf_node
+			FROM prometheus_db.NcbiTaxonomy_Node_AssemblyReport A, prometheus_db.NcbiTaxonomy_Name_20160107 B
+			WHERE A.parent_tax_id= #{id}
+			AND A.tax_id=B.tax_id
+			AND B.name_txt &lt;&gt; 'root' and A.tax_id &lt;&gt; 131567
+			
+			<if test="_parameter  == 1 ">
+    		UNION ALL
+				SELECT
+					A.tax_id
+					, A.parent_tax_id
+					, A.rank
+					, B.name_txt
+					, end_yn
+					, leaf_node
+				FROM prometheus_db.NcbiTaxonomy_Node_AssemblyReport A, prometheus_db.NcbiTaxonomy_Name_20160107 B
+				WHERE A.parent_tax_id = 131567 AND A.tax_id=B.tax_id
+			</if>
+		) A
+		ORDER BY BINARY(name_txt);
+	</select>
+
+	<!-- NCBI의 분류체계에서 검색된 tax_id에서 최상의 root까지의 경로를 반환해주는 쿼리 -->
+	<select id="getQueryResultAsTaxonNode" parameterType="String" resultMap="TaxonomyLineageMap">
+		SELECT
+			A.tax_id
+			, parent_tax_id
+			, rank
+			, name_txt
+			, A.lineage
+		FROM prometheus_db.NcbiTaxonomy_Node_20160107 A, (
+			SELECT * FROM prometheus_db.NcbiTaxonomy_Name_20160107 WHERE				
+			<if test="_parameter != null">
+				MATCH(name_txt) AGAINST( #{query} in boolean mode) HAVING name_txt LIKE CONCAT(REPLACE(REPLACE(#{query}, '\'', ''), '\"', ''), '%')
+			</if>			
+		) B
+		WHERE A.tax_id=B.tax_id
+	</select>
+	
+	
+	<select id="getTaxonomyInformation" parameterType="String" resultMap="TaxonomyListMap">
+		SELECT
+			a.tax_id
+			, a.parent_tax_id
+			, b.name_txt
+		FROM NcbiTaxonomy_Node_20160107 a, NcbiTaxonomy_Name_20160107 b
+		WHERE a.tax_id=b.tax_id
+		AND a.tax_id=${tax_id}
+	</select>
+	
+	<resultMap id="NcbiNameMap" type="org.kobic.omics.archive.vo.NcbiNameVo">
+		<result property="tax_id" column="tax_id"/>
+		<result property="name_txt" column="name_txt"/>
+	</resultMap>
+	
+	 <select id="getAssemblyId" parameterType="String" resultMap="NcbiNameMap">
+		select * from NcbiTaxonomy_Name_20160107 where name_txt = #{speciesName}
+	</select> 
+</mapper>

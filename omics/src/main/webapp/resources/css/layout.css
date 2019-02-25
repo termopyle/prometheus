@@ -1,0 +1,137 @@
+@charset "utf-8";
+/*-------------------------------------------------
+Author : KIM KYE YOUNG 김계영
+Last update : 2017. 07. 24.
+-------------------------------------------------*/
+
+
+#sitewrapper { width:100%; padding:0; margin:0 auto; }
+.main_bg { background:url(../images/main/main_bg.gif) top repeat-x;}
+.sub_bg { background:url(../images/common/sub_bg.gif) top repeat-x;}
+
+
+/* skip */
+.skipNavigation {margin:0px;padding:0px;list-style:none;position:absolute;left:0px;top:0px;width:200px;}
+.skipNavigation a {display:block;position:absolute;left:-2000px;top:0px;text-align:center;font-weight:bold;}
+.skipNavigation a:hover,
+.skipNavigation a:focus,
+.skipNavigation a:active {background:#777;color:#fff;border:1px solid #fff;padding:5px 10px 4px 10px;position:absolute;top:0px;left:0px;z-index:100;}
+
+
+/* 전체 감싸기 */
+#wrap {width:980px; margin:0 auto; padding:0; }
+
+
+/* 헤더 : 로고, 탑메뉴, 글로벌메뉴, 전체메뉴  */
+#header { width:980px; height:170px; margin:0 auto; }
+#header:after { content:"";display:block;clear:both;}
+#header h1 {display:inline-block;}
+#header h1 a {display:inline-block; height:18px; font-size:25px; color:#222; font-weight:bold; letter-spacing:-0.03em; text-decoration:none; margin:71px 0 31px 0;}
+#header h1 span { font-size:13px; color:#666; margin-left:8px; font-weight:normal;}
+#header .tm { float:right; margin-top:13px; font-weight:bold;}
+#header .tm li { float:left; background:url(../images/main/tm_bg.gif) no-repeat 0 center; padding-left:20px; font-size:11px; color:#666; line-height:12px;}
+#header .tm li:first-child { background:url(../images/common/home.gif) no-repeat; padding-left:20px}
+#header .tm li a:hover { color:#007868}
+
+/* 링크 */
+.globalmenu{ position:absolute; top:0; height:37px; line-height:37px; border-left:1px solid #ccc; font-size:11px; font-weight:600; }
+.globalmenu li, .globalmenu a { float:left; width:100px; text-align:center; color:#555}
+.globalmenu li { border-right:1px solid #ccc; }
+.globalmenu a:hover { background:#006053; color:#fff !important; }
+
+
+/* 메뉴 */
+#tmbox { width:980px; height:50px; margin:0 auto; }
+#tmenu { display:inline-block;}
+#tmenu li { float:left; font-size:17px; font-weight:bold; letter-spacing:-0.02em}
+#tmenu li:first-child a { margin-left:0;}
+#tmenu a{ color:#fff; padding:16px 5px 11px 4px; margin:0 24px; float:left;}
+#tmenu a:hover { color:#2cbfa8; border-bottom:5px solid #2cbfa8;  text-decoration:none;}
+#tmenu li.last a{ margin-right:0} 
+
+
+/* 검색 */
+.search { position:relative; height:40px; z-index:100; top:60px;}
+.search fieldset { width:980px; margin:0 auto; text-align:center;}
+.search legend { display:none;}
+.search label{ display:none;}
+.search .sch1 { width:415px; height:40px; font-size:14px; border:none; color:#006053; border-radius:40px; text-indent:20px;}
+.search .sch2 { border:0; width:40px; height:40px; margin-left:5px; background:url("../images/main/search.png") no-repeat; cursor: pointer;}
+
+
+/* 메인컨텐츠영역 */
+#contents { clear:both; margin:0 auto; }
+.conwrap { width:980px; margin:0 auto; }
+.conwrap1200 { width:1200px; margin:0 auto; }
+#col1 { width:980px; height:275px; margin:10px 0 40px 0; }
+#col2 { width:980px; height:220px;}
+
+
+/* 이미지 영역 */
+#mainV { position:relative; overflow:hidden; width:100%; min-width:980px; height:320px; top:-30px; }
+.visual { position:absolute; left:50%; margin-left:-2000px; }
+.slider { width:4000px; margin:0 auto; }
+.slider span { position:absolute; width:800px; margin-left:1550px; top:123px; font-size:16px; line-height:23px; letter-spacing:-0.03em; color:#fff; padding:14px 20px; z-index:90;}
+.slider strong { font-size:30px; display:block; margin-bottom:25px;}
+.slider img { z-index:80}
+.revolver.container { overflow:hidden; position:relative;}
+.revolver.stack .slide { left:0; position:absolute; top:0;}
+.controls { position:relative; width:980px; margin:0 auto; top:-200px; z-index:100;}
+.controls .previous { position:relative; left:0;}
+.controls .next { position:relative; left:925px;}
+
+
+/* 바로가기*/
+.conlink { width:980px; }
+.conlink li { float:left; font-size:13px; line-height:18px; width:215px; margin-left:40px;}
+.conlink li a {width:215px; height:130px; text-decoration: none; display:inline-block}
+.conlink li strong { width:215px; height:130px; overflow:hidden; display:block;}
+.conlink li:first-child { margin-left:0;}
+.conlink li span { position:absolute; top:640px; padding-top:40px; width:215px; display:block;}
+.conlink li a:hover span { position:absolute; top:640px; padding-top:40px; color:#006053;}
+
+
+/* list */
+.conlist { width:450px; color:#fff; float:left; }
+.conlist h3 { font-size:17px; line-height:35px;}
+.conlist h3 span { color:#b0dcd6;}
+.conlist dl { clear:both; font-size:12px; padding-top:16px; height:76px;}
+.conlist dt { background:url(../images/main/conlist_dot.gif) 0 8px no-repeat; font-weight:bold; padding:0 0 7px 10px; height:12px;}
+.conlist dd { padding-left:10px; overflow:hidden; width:440px; height:63px; line-height:21px; color:#ddd;}
+.conlist a { position:relative; top:-208px; margin-left:436px}
+
+
+/* datdabases */
+.datdabases { color:#fff;}
+.datdabases h3 { font-size:17px; line-height:35px;}
+.datdabases strong { color:#9fc80d; display:block; font-size:16px; margin:28px 0 72px 0;}
+.datdabases li { width:145px; margin-left:22px; float:left; text-align:center; font-size:14px; font-weight:bold;}
+.datdabases li:first-child { margin-left:0;}
+.datdabases span { display:block; font-size:13px; line-height:15px; font-weight:normal; margin-top:4px;}
+.datdabases .bg01 { background:url(../images/main/datdabases01.png) center 57px no-repeat;}
+.datdabases .bg02 { background:url(../images/main/datdabases02.png) center 57px no-repeat;}
+.datdabases .bg03 { background:url(../images/main/datdabases03.png) center 57px no-repeat;}
+.datdabases .bg04 { background:url(../images/main/datdabases04.png) center 57px no-repeat;}
+.datdabases .bg05 { background:url(../images/main/datdabases05.png) center 57px no-repeat;}
+.datdabases .bg06 { background:url(../images/main/datdabases06.png) center 57px no-repeat;}
+
+
+/* 하단 */
+#footer { background:#ccc; height:80px; padding-top:19px;}
+.footer { position:relative; width:980px; margin:0 auto;}
+.footer .f_logo { display:inline; float:left; margin-right:50px; padding:15px 0;}
+#footer address { font-size:11px; font-style:normal; color:#666; line-height:20px; margin-top:3px; }
+.familysite {position:absolute;right:0; bottom:17px; cursor:pointer; }
+.familysite ul{display:none; position:absolute; bottom:29px; background:rgba(255,255,255,0.7); font-size:11px; padding:5px 0; border:1px solid #999; width:228px; }
+.familysite li a { display:block; width:208px; color:#555; padding:0 5px; margin-left:5px; line-height:20px;}
+.familysite li a:hover { background:rgba(0,0,0,0.4); color:#fff;}
+
+
+
+/* 서브 */
+.subV { position:relative; overflow:hidden; width:100%; min-width:980px; height:150px; margin-top:10px;}
+.subV img { position:absolute; left:50%; margin-left:-2000px; }
+.subcon { margin:0 auto; padding:10px 1% 80px; line-height:21px; min-height:500px;}
+.subcon h3 { position:relative; width:980px; margin:0 auto; color:#fff; top:-100px; font-size:40px; height:40px; display:block;}
+.subcon h4 { display:block; font-size:22px; line-height:22px; color:#008570; background:url(../images/common/h4.gif) no-repeat; padding-left:25px; margin:30px 0 20px 0;}
+.subcon h4:first-child { margin-top:0; }

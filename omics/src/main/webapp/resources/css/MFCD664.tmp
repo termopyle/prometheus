@@ -1,0 +1,94 @@
+@charset "utf-8";
+
+
+#sitewrapper { width:100%; padding:0; margin:0 auto; }
+.main_bg { background:url(../images/main/main_bg.gif) top repeat-x;}
+.sub_bg { background:url(../images/common/sub_bg.gif) top repeat-x;}
+
+
+/* skip */
+.skipNavigation {margin:0px;padding:0px;list-style:none;position:absolute;left:0px;top:0px;width:200px;}
+.skipNavigation a {display:block;position:absolute;left:-2000px;top:0px;text-align:center;font-weight:bold;}
+.skipNavigation a:hover,
+.skipNavigation a:focus,
+.skipNavigation a:active {background:#777;color:#fff;border:1px solid #fff;padding:5px 10px 4px 10px;position:absolute;top:0px;left:0px;z-index:100;}
+
+
+/* 전체 감싸기 */
+#wrap {width:980px; margin:0 auto; padding:0; }
+
+
+/* 헤더 : 로고, 탑메뉴, 글로벌메뉴, 전체메뉴  */
+#header { width:980px; height:110px; margin:0 auto; }
+#header:after { content:"";display:block;clear:both;}
+#header h1 a {display:inline-block; height:18px; font-size:25px; color:#222; font-weight:bold; letter-spacing:-0.03em; text-decoration:none; padding:21px 0;} /*로고*/
+#header h1 span { font-size:13px; color:#555; margin-left:8px; font-weight:normal;}
+
+
+/* 검색 */
+
+
+
+
+/* 메뉴 */
+#tmbox { width:980px; height:50px; margin:0 auto; }
+#tmenu { display:inline-block;}
+#tmenu li { float:left; font-size:17px; font-weight:bold; letter-spacing:-0.02em}
+#tmenu li:first-child a { margin-left:0;}
+#tmenu a{ color:#fff; padding:16px 5px 11px 4px; margin:0 33px; float:left;}
+#tmenu a:hover { color:#2cbfa8; border-bottom:5px solid #2cbfa8;  text-decoration:none;}
+#tmenu li.last a{ margin-right:0} 
+
+/* */
+#contents { clear:both; width:980px; margin:0 auto;}
+
+
+/* 이미지 영역 */
+#mainV { width:1500px; height:250px; overflow:hidden; margin-left:-260px;}
+.slider {float:left; position:relative; width:1500px; height:250px; display:block;}
+.slider ul {position:absolute; list-style:none; top:0; left:0}
+.slider li {float:left; width:1500px; height:250px;}
+.slider span { position:absolute; top:53px; margin-left:280px; font-size:16px; z-index:2; line-height:23px; letter-spacing:-0.03em; color:#fff; padding:14px 20px;}
+.slider strong { font-size:30px; display:block; margin-bottom:25px;}
+.revolver.container { overflow:hidden; position:relative;}
+.revolver.stack .slide { left:0; position:absolute; top:0;}
+.controls { position:absolute; top:223px;}
+.controls .previous { position:relative; left:0;}
+.controls .next { position:relative; left:925px;}
+
+
+/* 메인컨텐츠영역 */
+#col1 { width:980px; height:305px; margin:40px 0;}
+#col2 { width:980px; height:260px; background:url(../images/main/conlist_bg.gif) center no-repeat;}
+
+
+/* 바로가기 */
+.conlink { width:980px;}
+.conlink li { float:left; font-size:13px; line-height:18px; width:164px; margin-left:40px;}
+.conlink li a {width:164px; height:130px; text-decoration: none; display:inline-block}
+.conlink li strong { width:164px;	height:130px;	overflow:hidden; display:block;}
+.conlink li:first-child { margin-left:0;}
+.conlink li span { position:absolute; top:530px; padding-top:16px; width:164px; display:block;}
+.conlink li a:hover span { position:absolute; top:530px; padding-top:16px; color:#006053;}
+
+
+/* list */
+.conlist { width:450px; color:#fff; float:left; }
+.conlist h3 { font-size:17px; line-height:35px;}
+.conlist h3 span { color:#b0dcd6;}
+.conlist dl { clear:both; font-size:12px; padding-top:16px; height:76px;}
+.conlist dt { background:url(../images/main/conlist_dot.gif) 0 8px no-repeat; font-weight:bold; padding:0 0 7px 10px; height:12px;}
+.conlist dd { padding-left:10px; overflow:hidden; width:440px; height:63px; line-height:21px; color:#ddd;}
+.conlist a { position:relative; top:-208px; margin-left:436px}
+
+
+/* 하단 */
+#footer { background:#ccc; height:61px; padding-top:19px;}
+#footer address { font-size:11px; font-style:normal; color:#333; line-height:20px; width:980px; margin:0 auto;}
+
+
+/* 서브 */
+.subV { width:1500px; height:150px; overflow:hidden; margin-left:-260px;}
+.subcon {width:980px; margin:0 auto; padding:50px 0 80px 0; line-height:21px;}
+.subcon h3 { position:absolute; color:#fff; top:175px; font-size:40px;}
+.subcon h4 { clear:both; font-size:15px; letter-spacing:-0.03em; background:url(../images/sub/h4.gif) left top no-repeat; padding-top:10px; margin-bottom:10px;}

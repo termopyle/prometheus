@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.closha.mapper.CloshaMapper">
+
+	<!-- resultMap -->
+	<resultMap id="CloshaInstanceMap" type="org.kobic.closha.vo.InstancePipelineVo">
+		<result property="id" column="id" />
+		<result property="instanceID" column="instanceID" />
+		<result property="pipelineID" column="pipelineID" />
+		<result property="exeID" column="exeID" />
+		<result property="pipelineName" column="pipelineName" />
+		<result property="instanceOwner" column="instanceOwner" />
+		<result property="ownerEmail" column="ownerEmail" />
+		<result property="instanceName" column="instanceName" />
+		<result property="instanceDesc" column="instanceDesc" />
+		<result property="instanceXML" column="instanceXML" />
+		<result property="status" column="status" />
+		<result property="exeCount" column="exeCount" />
+		<result property="createDate" column="createDate" />
+		<result property="projectPath" column="projectPath" />
+		<result property="register" column="register" />
+	</resultMap>
+
+	<!-- NCBI의 분류체계에서 현재 선택한 tax_id의 child를 반환해주는 쿼리 -->
+	<select id="getUserInstancePipeline" resultMap="CloshaInstanceMap">
+		SELECT * FROM instancepipeline 
+		WHERE instanceOwner = #{user_id}
+		AND 
+		(pipelineID = #{interpro_id} OR pipelineID = #{blast_id} OR pipelineID = #{last_id} OR pipelineID = #{clustalo_id} OR pipelineID = #{muscle_id})
+		LIMIT #{start_no}, #{page_size}
+	</select>
+	
+	<select id="getUserInstancePipelineCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+		SELECT COUNT(*) AS cnt FROM instancepipeline
+		WHERE instanceOwner = #{user_id}
+		AND 
+		(pipelineID = #{interpro_id} OR pipelineID = #{blast_id} OR pipelineID = #{last_id} OR pipelineID = #{clustalo_id} OR pipelineID = #{muscle_id})
+	</select>
+
+</mapper>
+

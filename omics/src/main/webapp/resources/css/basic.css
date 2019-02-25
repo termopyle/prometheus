@@ -1,0 +1,140 @@
+@charset "utf-8";
+/*-------------------------------------------------
+General Style Sheet
+Author :KIM KYE YOUNG 
+Last update :2016. 08. 16.
+-------------------------------------------------*/
+@import "layout.css";
+@import "content.css";
+	
+/* 기본태그 */
+
+* {padding:0;margin:0;}
+
+body { font-size:12px; color:#555; height:100%; /*overflow-y: scroll;*/ line-height:18px; font-family:Helvetica, Arial, dotum, sans-serif;}
+
+body,div,h1,h2,h6,ul,li,ol,dl,dt,dd,table,tr,td,p,span,img,input,p{padding:0;margin:0;}
+
+caption{ display:none;}
+ul,ol,dl{list-style:none;}
+form { padding:0; margin:0; }
+img, fieldset{ border:none;  margin:0; padding:0; vertical-align:middle }
+table { list-style:none;border-collapse:collapse; }
+input {	font-size:12px; color:#666; height:20px;line-height:20px; vertical-align:middle; text-indent:3px; border:#ccc solid 1px;}
+textarea  { 	font-size:12px; color:#666; height:20px;line-height:20px; vertical-align:middle; text-indent:3px; border:#ccc solid 1px; } 
+select { padding:0; margin:0; vertical-align: middle; color:#666; }
+ 
+/* 링크 스타일 */
+a {  -webkit-transition:all 0.3s; -moz-transition:all 0.3s; -o-transition:all 0.3s; transition:all 0.3s; }
+a:link {color:#666;text-decoration:none;}
+a:visited {color:#666;text-decoration:none;}
+a:hover {color:#666;text-decoration:underline;}
+a:active {color:#666;text-decoration:none;}
+
+input[type=submit],
+input[type=image],
+input[type=radio],
+input[type=checkbox]{border:0;}
+input:focus, textarea:focus { outline: none;}
+
+/* display */
+.block{display:block;}
+.none{display:none!important;}
+
+/* margin */
+.mt70 {margin-top:70px !important;}
+.mt60 {margin-top:60px !important;}
+.mt50 {margin-top:50px !important;}
+.mt45 {margin-top:45px !important;}
+.mt40 {margin-top:40px !important;}
+.mt30 {margin-top:30px !important;}
+.mt25 {margin-top:25px !important;}
+.mt20 {margin-top:20px !important;}
+.mt16 {margin-top:16px !important;}
+.mt15 {margin-top:15px !important;}
+.mt14 {margin-top:14px !important;}
+.mt10 {margin-top:10px !important;}
+.mt5 {margin-top:5px !important;}
+.mt3 {margin-top:3px !important;}
+
+.mr40 {margin-right:40px !important;}
+.mr30 {margin-right:30px !important;}
+.mr20 {margin-right:20px !important;}
+.mr15 {margin-right:15px !important;}
+.mr10 {margin-right:10px !important;}
+.mr5 {margin-right:5px !important;}
+
+.mb80 {margin-bottom:80px !important;}
+.mb30 {margin-bottom:30px !important;}
+.mb20 {margin-bottom:20px !important;}
+.mb15 {margin-bottom:15px !important;}
+.mb10 {margin-bottom:10px !important;}
+.mb5 {margin-bottom:5px !important;}
+
+.ml70 {margin-left:70px !important;}
+.ml50 {margin-left:50px !important;}
+.ml40 {margin-left:40px !important;}
+.ml30 {margin-left:30px !important;}
+.ml20 {margin-left:20px !important;}
+.ml12 {margin-left:12px !important;}
+.ml15 {margin-left:15px !important;}
+.ml10 {margin-left:10px !important;}
+.ml5 {margin-left:5px !important;}
+
+/* padding */
+.pt50 {padding-top:50px !important;}
+.pt40 {padding-top:40px !important;}
+.pt30 {padding-top:30px !important;}
+.pt25 {padding-top:25px !important;}
+.pt20 {padding-top:20px !important;}
+.pt15 {padding-top:15px !important;}
+.pt10 {padding-top:10px !important;}
+.pt9 {padding-top:9px !important;}
+.pt8 {padding-top:8px !important;}
+.pt5 {padding-top:5px !important;}
+
+.pr40 {padding-right:40px !important;}
+.pr30 {padding-right:30px !important;}
+.pr20 {padding-right:20px !important;}
+.pr15 {padding-right:15px !important;}
+.pr10 {padding-right:10px !important;}
+.pr5 {padding-right:5px !important;}
+
+.pb45 {padding-bottom:45px !important;}
+.pb36 {padding-bottom:36px !important;}
+.pb30 {padding-bottom:30px !important;}
+.pb20 {padding-bottom:20px !important;}
+.pb18 {padding-bottom:18px !important;}
+.pb15 {padding-bottom:15px !important;}
+.pb10 {padding-bottom:10px !important;}
+.pb9 {padding-bottom:9px !important;}
+.pb5 {padding-bottom:5px !important;}
+
+.pl110 {padding-left:110px !important;}
+.pl50 {padding-left:50px !important;}
+.pl40 {padding-left:40px !important;}
+.pl30 {padding-left:30px !important;}
+.pl20 {padding-left:20px !important;}
+.pl15 {padding-left:15px !important;}
+.pl10 {padding-left:10px !important;}
+.pl5 {padding-left:5px !important;}
+
+/* float */
+.floatL{float:left;}
+.floatR{float:right;}
+
+/* clear */
+.clear {clear:both;}
+
+/* bg_none */
+.bg_none {background:none!important;}
+
+/* hand */
+.hand {cursor:pointer;}
+
+/* align */
+.txtL{text-align:left!important;}
+.txtR{text-align:right!important;}
+.txtC{text-align:center!important;}
+
+.hidden { display:none;}

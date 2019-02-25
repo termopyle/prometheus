@@ -1,0 +1,26 @@
+{
+   "tracks" : [
+      {
+         "storeClass" : "JBrowse/Store/Sequence/StaticChunked",
+         "chunkSize" : 20000,
+         "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
+         "label" : "DNA",
+         "type" : "SequenceTrack",
+         "category" : "Reference sequence",
+         "key" : "Reference sequence"
+      },
+      {
+         "style" : {
+            "className" : "feature"
+         },
+         "key" : "Genes",
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "trackType" : "CanvasFeatures",
+         "urlTemplate" : "tracks/Genes/{refseq}/trackData.json",
+         "compress" : 0,
+         "type" : "CanvasFeatures",
+         "label" : "Genes"
+      }
+   ],
+   "formatVersion" : 1
+}

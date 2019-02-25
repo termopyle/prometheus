@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.omics.interpro.analysis.mapper.InterproAnalysisMapper">
+
+	<resultMap id="domainVoMap" type="org.kobic.omics.viewer.vo.DomainVo">
+		<result property="no" column="no" />
+		<result property="db" column="db" />
+		<result property="db_id" column="db_id" />
+		<result property="db_desc" column="db_desc" />
+		<result property="link_url" column="link_url" />
+		<result property="start" column="start" />
+		<result property="end" column="end" />
+		<result property="evalue" column="evalue" />
+		<result property="ipr_id" column="ipr_id" />
+		<result property="ipr_desc" column="ipr_desc" />	
+		<result property="go" column="go" />
+		
+		<result property="tax_id" column="tax_id" />
+		<result property="species" column="species" />
+		<result property="assembly_accession" column="assembly_accession" />
+		<result property="assembly" column="assembly" />
+		<result property="protein_accession_version" column="protein_accession_version" />
+		<result property="protein_length" column="protein_length" />
+	</resultMap>
+	
+	<resultMap id="IprDomainTypeMap" type="org.kobic.omics.interpro.vo.IprDomainTypeVo">
+		<result property="id" column="id" />
+		<result property="type" column="type" />
+	</resultMap>
+	
+
+	<select id="searchInterproDomains" parameterType="java.util.Map" resultMap="domainVoMap">
+		SELECT
+			a.idx as no
+			, b.tax_id
+			, b.species
+			, b.assembly_accession
+			, b.assembly
+			, b.protein_accession_version
+			, a.protein_length
+			, a.db
+			, a.db_id
+			, a.db_desc
+			, a.link_url
+			, a.start
+			, a.end
+			, a.evalue
+			, a.ipr_id
+			, a.ipr_desc
+			, a.go_term as go
+		FROM InterproScan_Refseq a, (
+			SELECT * FROM InterproScan_Refseq_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		WHERE a.basic_idx=b.id
+		AND a.idx BETWEEN b.idx_start AND b.idx_end
+		union ALL
+		select a.* from InterproScan_Ensembl a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Ensembl_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_Phytozome a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Phytozome_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_Solgenomics a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Solgenomics_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_TheOthers a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_TheOthers_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+	</select>
+	
+    <select id="getIprDomainInfo" parameterType="java.util.Map" resultMap="IprDomainTypeMap">
+	    SELECT
+			id, type
+		FROM InterproDomainList
+		WHERE id IN (
+			<if test="domainList != null">
+				<foreach collection="domainList" item="item" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		)
+    </select>
+
+</mapper>

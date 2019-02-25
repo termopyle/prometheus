@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.omics.viewer.mapper.ViewerMapper">
+
+	<resultMap id="proteinWithDomainVoMap" type="org.kobic.omics.viewer.vo.ProteinWithDomainVo">
+		<result property="nid" column="nid" />
+		<result property="nm" column="nm" />
+		<result property="ncbi_id" column="ncbi_id" />
+		<result property="length" column="length" />
+
+	</resultMap>
+	
+	<resultMap id="domainListMap"  type="java.util.HashMap">
+		<result property="no" column="no" />
+		<result property="db" column="db" />
+		<result property="db_id" column="db_id" />
+		<result property="db_desc" column="db_desc" />
+		<result property="link_url" column="link_url" />
+		<result property="start" column="start" />
+		<result property="end" column="end" />
+		<result property="evalue" column="evalue" />
+		<result property="ipr_id" column="ipr_id" />
+		<result property="ipr_desc" column="ipr_desc" />	
+		<result property="go" column="go" />
+	</resultMap>
+
+	<resultMap id="domainVoMap" type="org.kobic.omics.viewer.vo.DomainVo">
+		<result property="no" column="no" />
+		<result property="db" column="db" />
+		<result property="db_id" column="db_id" />
+		<result property="db_desc" column="db_desc" />
+		<result property="link_url" column="link_url" />
+		<result property="start" column="start" />
+		<result property="end" column="end" />
+		<result property="evalue" column="evalue" />
+		<result property="ipr_id" column="ipr_id" />
+		<result property="ipr_desc" column="ipr_desc" />	
+		<result property="go" column="go" />
+		
+		<result property="tax_id" column="tax_id" />
+		<result property="species" column="species" />
+		<result property="assembly_accession" column="assembly_accession" />
+		<result property="assembly" column="assembly" />
+		<result property="protein_accession_version" column="protein_accession_version" />
+		<result property="protein_length" column="protein_length" />
+	</resultMap>
+
+	<resultMap id="TmHmmVoMap" type="org.kobic.omics.viewer.vo.TmHmmVo">
+		<result property="tax_id"				column="tax_id" />
+		<result property="refseq_assembly_id"	column="refseq_assembly_id" />
+		<result property="protein_accession_id"	column="protein_accession_id" />
+		<result property="length" 				column="length" />
+		<result property="no_predicted_tmhs"	column="no_predicted_tmhs" />
+		<result property="exp_no_aas_in_tmhs"	column="exp_no_aas_in_tmhs" />
+		<result property="exp_no_first_60_aas"	column="exp_no_first_60_aas" />
+		<result property="total_prob_n_in"		column="total_prob_n_in" />
+		<result property="location"				column="location" />
+	</resultMap>
+
+	<resultMap id="FeatureVoMap" type="org.kobic.omics.viewer.vo.FeatureVo">
+		<result property="TaxId"			column="TaxId" />
+		<result property="organism"			column="organism" />
+		<result property="RefSeqAssemblyID"	column="RefSeqAssemblyID" />
+		<result property="AssemblyName" 	column="AssemblyName" />
+		<result property="LocusVersion"		column="LocusVersion" />
+		<result property="Source"			column="Source" />
+		<result property="Feature"			column="Feature" />
+		<result property="Start"			column="Start" />
+		<result property="End"				column="End" />
+		<result property="Score" 			column="Score" />
+		<result property="Strand"			column="Strand" />
+		<result property="Frame"			column="Frame" />
+		<result property="Attributes"		column="Attributes" />
+		<result property="ProteinID"		column="ProteinID" />
+		<result property="GeneName"			column="GeneName" />
+	</resultMap>
+	
+	<resultMap id="GeneStructureVoMap" type="org.kobic.omics.viewer.vo.GeneStructureVo">
+		<result property="TaxId"			column="TaxId" />
+		<result property="organism"			column="organism" />
+		<result property="RefSeqAssemblyID"	column="RefSeqAssemblyID" />
+		<result property="AssemblyName" 	column="AssemblyName" />
+		<result property="LocusVersion"		column="LocusVersion" />
+		<result property="Source"			column="Source" />
+		<result property="Feature"			column="Feature" />
+		<result property="Start"			column="Start" />
+		<result property="End"				column="End" />
+		<result property="Score" 			column="Score" />
+		<result property="Strand"			column="Strand" />
+		<result property="Frame"			column="Frame" />
+		<result property="Attributes"		column="Attributes" />
+		<result property="ProteinID"		column="ProteinID" />
+		<result property="GeneName"			column="GeneName" />
+	</resultMap>
+	
+	<resultMap id="MultilocVoMap" type="org.kobic.omics.viewer.vo.MultilocVo">
+		<result property="cytoplasmic" column="cytoplasmic"/>
+		<result property="mitochondrial" column="mitochondrial"/>
+		<result property="peroxisomal" column="peroxisomal"/>
+		<result property="nuclear" column="nuclear"/>
+		<result property="er" column="er"/>
+		<result property="plasma_membrane" column="plasma_membrane"/>
+		<result property="golgi_apparatus" column="golgi_apparatus"/>
+		<result property="lysosomal" column="lysosomal"/>
+		<result property="vacuolar" column="vacuolar"/>
+		<result property="chloroplast" column="chloroplast"/>
+		<result property="extracellular" column="extracellular"/>
+		<result property="refseq_assembly_id" column="refseq_assembly_id"/>
+		<result property="protein_accession_id" column="protein_accession_id"/>
+		<result property="tax_id" column="tax_id"/>
+	</resultMap>
+	
+	<resultMap id="TargetpVoMap" type="org.kobic.omics.viewer.vo.TargetpVo">
+		<result property="tax_id" column="tax_id"/>
+		<result property="refseq_assembly_id" column="refseq_assembly_id"/>
+		<result property="protein_accession_id" column="protein_accession_id"/>
+		<result property="len" column="len"/>
+		<result property="ctp" column="ctp"/>
+		<result property="mtp" column="mtp"/>
+		<result property="sp" column="sp"/>
+		<result property="other" column="other"/>
+		<result property="loc" column="loc"/>
+		<result property="rc" column="rc"/>
+		<result property="tplen" column="tplen"/>
+	</resultMap>
+
+	<resultMap id="OrthologVOMap"  type="org.kobic.omics.viewer.vo.OrthologVO">
+		<result property="no" 				column="no" />
+		<result property="subject_species"	column="subject_species" />
+		<result property="subject_id"		column="subject_id" />
+		<result property="subject_tax_id"	column="subject_tax_id" />
+		<result property="ortholog_species"	column="ortholog_species" />
+		<result property="ortholog_id"		column="ortholog_id" />
+		<result property="ortholog_tax_id"	column="ortholog_tax_id" />
+	</resultMap>
+
+	<resultMap id="ParalogVOMap"  type="org.kobic.omics.viewer.vo.ParalogVO">
+		<result property="no" 				column="no" />
+		<result property="subject_species"	column="subject_species" />
+		<result property="subject_id"		column="subject_id" />
+		<result property="subject_tax_id"	column="subject_tax_id" />
+		<result property="paralog_id"		column="paralog_id" />
+		<result property="paralog_tax_id"	column="paralog_tax_id" />
+	</resultMap>
+	
+	<resultMap id="TaxIdWithDbVo" type="org.kobic.omics.interpro.vo.TaxIdWithDbVo">
+		<result property="db" column="db" />
+		<result property="result" column="result" />
+	</resultMap>
+	
+	
+	<resultMap id="OrthoMCLVoMap" type="org.kobic.omics.viewer.vo.OrthoMclVo">
+		<result property="no" 					column="no" />
+		<result property="src_organism"			column="src_organism" />
+		<result property="src_assembly_id"		column="src_assembly_id" />
+		<result property="src_protein_id"		column="src_protein_id" />
+		<result property="tar_organism"			column="tar_organism" />
+		<result property="tar_assembly_id"		column="tar_assembly_id" />
+		<result property="tar_protein_id"		column="tar_protein_id" />
+	<result property="desc"						column="desc" />
+	</resultMap>
+
+	<select id="getTMHMM" parameterType="java.util.Map" resultMap="TmHmmVoMap">
+		SELECT 
+			tax_id
+			, refseq_assembly_id
+			, protein_accession_id
+			, length, no_predicted_tmhs
+			, exp_no_aas_in_tmhs
+			, exp_no_first_60_aas
+			, total_prob_n_in
+			, location
+		FROM prometheus_db.SubLocal_TMHMM
+		WHERE tax_id=#{tax_id} AND protein_accession_id=#{protein_accession_id} AND refseq_assembly_id=#{refseq_assembly_id}
+	</select>
+	
+	<select id="getGeneStructureByRefSeq" parameterType="java.util.Map" resultMap="FeatureVoMap">
+		SELECT
+			b.TaxId
+			, b.organism
+			, b.RefSeqAssemblyID
+			, b.AssemblyName
+			, a.LocusVersion
+			, b.Source
+			, a.Feature
+			, a.Start
+			, a.End
+			, a.Score
+			, a.Strand
+			, a.Frame
+			, a.Attributes
+			, a.ProteinID
+			, a.GeneName
+		FROM ${tableName} a, (
+			SELECT * FROM BasicInfo_GenomicGFF WHERE TaxId=${tax_id} AND RefSeqAssemblyID=#{refseq_assembly_id} AND tableNm=#{tableName}
+		) b,
+		(
+			SELECT `no` FROM BasicInfo_GenomicGFF
+			WHERE TaxId=${tax_id}
+			AND RefSeqAssemblyID=#{refseq_assembly_id}
+		) c,
+		(
+			SELECT DISTINCT gene_id FROM ${tableName}
+			WHERE basic_id IN (
+				SELECT `no` FROM BasicInfo_GenomicGFF
+					WHERE TaxId=${tax_id}
+					AND RefSeqAssemblyID=#{refseq_assembly_id}
+			)
+			AND ProteinID=#{keyword}
+		) d
+		WHERE a.basic_id=c.no
+		AND a.gene_id=d.gene_id
+		AND a.basic_id=b.`no`
+		ORDER BY a.Feature, a.Start
+	</select>
+	
+	<select id="getGeneStructure" parameterType="java.util.Map" resultMap="FeatureVoMap">
+		SELECT
+			TaxId
+			, Organism
+			, RefSeqAssemblyID
+			, AssemblyName
+			, LocusVersion
+			, Source
+			, Feature
+			, Start
+			, End
+			, Score
+			, Strand
+			, Frame
+			, Attributes
+			, ProteinID
+		FROM ${tableName}
+		WHERE GeneID=(
+			SELECT distinct GeneID FROM ${tableName}
+			WHERE TaxId=${tax_id} AND RefSeqAssemblyID=#{refseq_assembly_id} AND ProteinID=#{keyword})
+		AND TaxId=${tax_id}
+		ORDER BY Feature, Start
+	</select>
+
+	<select id="getGeneInfoByRefSeq" parameterType="java.util.Map" resultMap="GeneStructureVoMap">
+		SELECT
+			b.TaxId
+			, b.organism
+			, b.RefSeqAssemblyID
+			, b.AssemblyName
+			, a.LocusVersion
+			, b.Source
+			, a.Feature
+			, a.Start
+			, a.End
+			, a.Score
+			, a.Strand
+			, a.Frame
+			, a.Attributes
+			, a.ProteinID
+			, SUBSTRING_INDEX(SUBSTRING_INDEX(Attributes,"Name=",-1),";",1) as 'GeneName'
+		FROM ${tableName} a, (
+			SELECT * FROM BasicInfo_GenomicGFF WHERE TaxId=${tax_id} AND RefSeqAssemblyID=#{refseq_assembly_id} AND tableNm=#{tableName}
+		) b,
+		(
+			SELECT `no` FROM BasicInfo_GenomicGFF
+			WHERE TaxId=${tax_id}
+			AND RefSeqAssemblyID=#{refseq_assembly_id}
+		) c,
+		(
+			SELECT DISTINCT gene_id FROM ${tableName}
+			WHERE basic_id IN (
+				SELECT `no` FROM BasicInfo_GenomicGFF
+					WHERE TaxId=${tax_id}
+					AND RefSeqAssemblyID=#{refseq_assembly_id}
+			)
+			AND ProteinID=#{keyword}
+		) d
+		WHERE a.basic_id=c.no
+		AND a.gene_id=d.gene_id
+		AND a.basic_id=b.`no`
+		AND a.Feature='gene'
+	</select>
+	
+	<select id="getGeneInfo" parameterType="java.util.Map" resultMap="GeneStructureVoMap">
+		SELECT
+			TaxId
+			, Organism
+			, RefSeqAssemblyID
+			, AssemblyName
+			, LocusVersion
+			, Source
+			, Feature
+			, Start
+			, End
+			, Score
+			, Strand
+			, Frame
+			, Attributes
+			, ProteinID
+			,
+			<choose>
+				<when test="(db eq 'Ensembl'.toString())">
+					SUBSTRING_INDEX(SUBSTRING_INDEX(Attributes,"gene_name=",-1),";",1) as 'GeneName'
+				</when>
+				<when test="(db eq 'Phytozome'.toString())">
+					SUBSTRING_INDEX(Attributes,"Name=",-1) as 'GeneName'
+				</when>
+				<when test="(db eq 'Sol Genomics'.toString())">
+					SUBSTRING_INDEX(Attributes,"Name=",-1) as 'GeneName'
+				</when>
+				<otherwise>
+					GeneID as 'GeneName'
+				</otherwise>
+			</choose>
+		FROM ${tableName}
+		WHERE GeneID=(
+			SELECT distinct GeneID FROM ${tableName}
+			WHERE TaxId=${tax_id} AND RefSeqAssemblyID=#{refseq_assembly_id} AND ProteinID=#{keyword})
+		AND TaxId=${tax_id}
+		AND Feature='gene'
+	</select>
+
+	<select id="getKingdomTablesByTaxId" parameterType="java.util.Map" resultMap="TaxIdWithDbVo">
+		SELECT
+			db
+			, Kingdom as kingdom
+			,
+			CASE WHEN db='RefSeq' THEN
+				CASE WHEN Kingdom='bacteria' 		THEN 'NEW_pri_RefSeq_${type}_BACTERIA${modified}'
+				WHEN Kingdom='archaea' 				THEN 'NEW_pri_RefSeq_${type}_ARCHAEA${modified}'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'NEW_pri_RefSeq_${type}_VERTEBRATE_MAMMALIAN${modified}'
+				WHEN Kingdom='plant' 				THEN 'NEW_pri_RefSeq_${type}_PLANT${modified}'
+				WHEN Kingdom='invertebrate' 		THEN 'NEW_pri_RefSeq_${type}_INVERTEBRATE${modified}'
+				WHEN Kingdom='fungi' 				THEN 'NEW_pri_RefSeq_${type}_FUNGI${modified}'
+				WHEN Kingdom='vertebrate_other' 	THEN 'NEW_pri_RefSeq_${type}_VERTEBRATE_OTHER${modified}'
+				WHEN Kingdom='protozoa' 			THEN 'NEW_pri_RefSeq_${type}_PROTOZOA${modified}'
+				END
+			WHEN db='Ensembl' THEN
+				CASE WHEN Kingdom='fungi' 			THEN 'NEW_pri_ensembl_${type}_FUNGI'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'NEW_pri_ensembl_${type}_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='invertebrate' 		THEN 'NEW_pri_ensembl_${type}_INVERTEBRATE'
+				WHEN Kingdom='vertebrate_other' 	THEN 'NEW_pri_ensembl_${type}_VERTEBRATE_OTHER'
+				END
+			WHEN db='Phytozome' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'NEW_pri_Phytozome_${type}_PLANT'
+				END
+			WHEN db='Sol Genomics' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'NEW_pri_Solgenomics_${type}_PLANT'
+				END
+			WHEN db='TheOthers' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'NEW_pri_TheOthers_${type}_PLANT'
+				END
+			END AS RESULT
+		FROM prometheus_db.TaxId_with_info
+		WHERE TaxId=#{tax_id}
+	</select>
+
+	<select id="getSequence" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT
+			Seq
+		FROM ${kingdom_table_query}
+		WHERE TaxId=#{TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+	</select>
+    
+	<select id="getCDS" parameterType="java.util.Map" resultType="java.lang.String">
+		<choose>
+			<when test="(db eq 'Ensembl'.toString())">
+<!-- 				SELECT 
+					a.Seq
+				FROM NEW_pri_ensembl_rnafna_${type} a, (
+					SELECT TaxId, RefSeqAssemblyID, LocusVersion, stable_id FROM NEW_pri_ensembl_proteinfaa_${type}
+					WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+				) b
+				WHERE a.TaxId=b.TaxId
+				AND a.RefSeqAssemblyID=b.RefSeqAssemblyID
+				AND a.stable_id=b.stable_id -->
+				SELECT 
+					a.Seq
+				FROM NEW_pri_ensembl_rnafna_${type} a
+				WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+			</when>
+			<when test="(db eq 'RefSeq'.toString())">
+				<choose>
+					<when test="(type eq 'BACTERIA'.toString() or type eq 'ARCHAEA'.toString())">
+						SELECT 
+							UPPER(a.Seq)
+						FROM NEW_pri_RefSeq_rnafna_${type} a
+						WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+						limit 1
+					</when>
+					<otherwise>
+						SELECT
+							UPPER(Seq) as 'CDS'
+						FROM NEW_pri_RefSeq_rnafna_${type}
+						WHERE (TaxId, RefSeqAssemblyID, mRNAID) IN (
+							SELECT
+								TaxId, RefSeqAssemblyID, mRNAID
+							FROM prometheus_db.Feature_Transcript
+							WHERE (TaxId, RefSeqAssemblyID, ID) IN (
+								SELECT
+									TaxId, RefSeqAssemblyID, parent
+								FROM prometheus_db.Feature_CDS
+								WHERE TaxId=${TaxId} and RefSeqAssemblyID=#{RefSeqAssemblyID} and ProteinID=#{ProteinID}
+								GROUP BY TaxId, RefSeqAssemblyID, parent 
+							)
+						)
+					</otherwise>
+				</choose>
+			</when>
+			<when test="(db eq 'Phytozome'.toString())">
+				SELECT 
+					a.Seq
+				FROM NEW_pri_Phytozome_transcript_${type} a
+				WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+			</when>
+			<when test="(db eq 'Sol Genomics'.toString())">
+				SELECT 
+					a.Seq
+				FROM NEW_pri_Solgenomics_transcript_${type} a
+				WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND TranscriptID=#{ProteinID}
+			</when>
+			<otherwise>
+				SELECT 
+					a.Seq
+				FROM NEW_pri_TheOthers_transcript_${type} a
+				WHERE TaxId=${TaxId} and RefSeqAssemblyID=#{RefSeqAssemblyID} AND TranscriptID=#{ProteinID}
+			</otherwise>
+		</choose>
+		
+		<!-- SELECT
+			Seq as 'CDS'
+		FROM ${kingdom_table_query}
+		WHERE (TaxId, RefSeqAssemblyID, mRNAID) IN (
+			SELECT
+				TaxId, RefSeqAssemblyID, mRNAID
+			FROM prometheus_db.Feature_Transcript
+			WHERE (TaxId, RefSeqAssemblyID, ID) IN (
+				SELECT
+					TaxId, RefSeqAssemblyID, parent
+				FROM prometheus_db.Feature_CDS
+				WHERE TaxId=#{TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ${ProteinIDField}=#{ProteinID}
+				GROUP BY TaxId, RefSeqAssemblyID, parent
+			)
+		) -->
+	</select>
+	
+	<select id="getMultiloc" parameterType="java.util.Map" resultMap="MultilocVoMap">
+		SELECT
+			ifnull(cytoplasmic,'0.0') as 'cytoplasmic',
+			ifnull(mitochondrial,'0.0') as 'mitochondrial',
+			ifnull(peroxisomal,'0.0') as 'peroxisomal',
+			ifnull(nuclear,'0.0') as 'nuclear',
+			ifnull(er,'0.0') as 'er',
+			ifnull(plasma_membrane,'0.0') as 'plasma_membrane',
+			ifnull(golgi_apparatus,'0.0') as 'golgi_apparatus', 
+			ifnull(lysosomal,'0.0') as 'lysosomal',
+			ifnull(vacuolar,'0.0') as 'vacuolar', 
+			ifnull(chloroplast,'0.0') as 'chloroplast',
+			ifnull(extracellular,'0.0') as 'extracellular'
+		FROM prometheus_db.SubLocal_Multiloc
+		WHERE tax_id=#{tax_id} 
+		AND refseq_assembly_id=#{refseq_assembly_id} 
+		AND protein_accession_id=#{protein_accession_id}
+	</select>
+	
+	<select id="getTargetp" parameterType="java.util.Map" resultMap="TargetpVoMap">
+		SELECT * FROM prometheus_db.SubLocal_TargetP
+		WHERE tax_id=#{tax_id} 
+		AND refseq_assembly_id=#{refseq_assembly_id} 
+		AND protein_accession_id=#{protein_accession_id}
+	</select>
+
+	<select id="findGeneFromProtein" parameterType="java.util.Map" resultMap="FeatureVoMap">	
+		SELECT
+			a.TaxId
+			, a.organism
+			, a.RefSeqAssemblyID
+			, a.AssemblyName
+			, a.LocusVersion
+			, a.Source
+			, a.Feature
+			, a.Start
+			, a.End
+			, a.Score
+			, a.Strand
+			, a.Frame
+			, a.Attributes
+			, a.ProteinID
+			, a.GeneName
+		FROM Feature_Gene_with_Protein a
+		WHERE TaxID=${tax_id} AND ProteinID=#{protein_id}
+	</select>
+
+	<select id="findOrtholog" parameterType="java.util.Map" resultMap="OrthologVOMap">
+		SELECT
+			a.NO 					as no
+			, b.Subject_species		as subject_species
+			, b.Subject_ID			as subject_id
+			, b.Subject_tax_id		as subject_tax_id
+			, a.Ortholog_species	as ortholog_species
+			, a.Ortholog_ID			as ortholog_id
+			, a.Ortholog_tax_id		as ortholog_tax_id
+		FROM Ortholog_Target a, (
+			SELECT * FROM Ortholog_Subject
+			WHERE Subject_tax_id=#{tax_id} AND Subject_ID=#{protein_id}
+		) b
+		where a.Subject_idx=b.idx
+	</select>
+	
+	<select id="findParalog" parameterType="java.util.Map" resultMap="ParalogVOMap">
+		SELECT
+			a.NO				as no
+			, b.Subject_species	as subject_species
+			, b.Subject_ID		as subject_id
+			, b.tax_id 			as subject_tax_id
+			, a.paralog_ID		as paralog_id
+			, a.tax_id			as paralog_tax_id
+		FROM Paralog_Target a, (
+			SELECT * FROM Paralog_Subject
+			WHERE tax_id=#{tax_id} AND Subject_ID=#{protein_id}
+		) b
+		WHERE a.Subject_idx=b.idx
+	</select>
+	
+	<select id="getOrthoMCLResults" parameterType="java.util.Map" resultMap="OrthoMCLVoMap">
+		SELECT
+			@rownum:=@rownum+1	no
+			, a.src_organism
+			, b.refseq_assembly_id as src_assembly_id
+			, b.protein_id as src_protein_id
+			, a.tar_organism
+			, c.refseq_assembly_id as tar_assembly_id
+			, c.protein_id as tar_protein_id
+			, a.desc
+		FROM OrthoMCL_Result a, (
+			SELECT * FROM OrthoMCL_protein_dictionary
+			WHERE tax_id=#{tax_id} AND refseq_assembly_id=#{refseq_assembly_id}  AND protein_id=#{protein_accession_id}
+		) b, OrthoMCL_protein_dictionary c, (SELECT @rownum:=0) d
+		WHERE a.src_protein_id=b.id
+		AND a.tar_protein_id=c.id
+		ORDER BY no, a.desc, c.refseq_assembly_id, c.protein_id
+	</select>
+
+
+	<select id="searchInterproDomains" parameterType="java.util.Map" resultMap="domainVoMap">
+		SELECT
+			a.idx as no
+			, b.tax_id
+			, b.species
+			, b.assembly_accession
+			, b.assembly
+			, b.protein_accession_version
+			, a.protein_length
+			, a.db
+			, a.db_id
+			, a.db_desc
+			, a.link_url
+			, a.start
+			, a.end
+			, a.evalue
+			, a.ipr_id
+			, a.ipr_desc
+			, a.go_term as go
+		FROM InterproScan_Refseq a, (
+			SELECT * FROM InterproScan_Refseq_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		WHERE a.basic_idx=b.id
+		AND a.idx BETWEEN b.idx_start AND b.idx_end
+		union ALL
+		select a.* from InterproScan_Ensembl a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Ensembl_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_Phytozome a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Phytozome_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_Solgenomics a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Solgenomics_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_TheOthers a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_TheOthers_Unique_Protein
+			WHERE tax_id=${tax_id} AND assembly_accession=#{refseq_assembly_id} AND protein_accession_version=#{protein_accession_id}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+	</select>
+	
+	<select id="getKingdomAndDB" parameterType="java.lang.String" resultMap="TaxIdWithDbVo">
+    	<!-- SELECT
+    		kingdom,
+    		db
+    	FROM prometheus_db.TaxId_with_info
+    	WHERE TaxId=#{tax_id} -->
+    	
+    	SELECT
+	    	db
+	    	, Kingdom as kingdom
+	    	,
+			CASE WHEN db='RefSeq' THEN
+				CASE WHEN Kingdom='bacteria' 		THEN 'Representative_RefSeq_BACTERIA'
+				WHEN Kingdom='archaea' 				THEN 'Representative_RefSeq_ARCHAEA'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'Representative_RefSeq_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='plant' 				THEN 'Representative_RefSeq_PLANT'
+				WHEN Kingdom='invertebrate' 		THEN 'Representative_RefSeq_INVERTEBRATE'
+				WHEN Kingdom='fungi' 				THEN 'Representative_RefSeq_FUNGI'
+				WHEN Kingdom='vertebrate_other' 	THEN 'Representative_RefSeq_VERTEBRATE_OTHER'
+				WHEN Kingdom='protozoa' 			THEN 'Representative_RefSeq_PROTOZOA'
+				END
+			WHEN db='Ensembl' THEN
+				CASE WHEN Kingdom='fungi' 			THEN 'Representative_Ensembl_FUNGI'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'Representative_Ensembl_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='invertebrate' 		THEN 'Representative_Ensembl_INVERTEBRATE'
+				WHEN Kingdom='vertebrate_other' 	THEN 'Representative_Ensembl_VERTEBRATE_OTHER'
+				END
+			WHEN db='Phytozome' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'Representative_Phytozome_PLANT'
+				END
+			WHEN db='Sol Genomics' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'Representative_Solgenomics_PLANT'
+				END
+			WHEN db='TheOthers' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'Representative_TheOthers_PLANT'
+				END
+			END AS result
+		FROM prometheus_db.TaxId_with_info
+		WHERE TaxId=#{tax_id}
+    </select>
+	
+	<select id="getProteinID" parameterType="java.util.Map" resultType="java.lang.String">
+		select ProteinID from ${kingdom_table_query}
+		where TaxID=${tax_id} and RefSeqAssemblyID=#{refseq_assembly_id} and GeneID=binary(#{geneName})
+	</select>
+
+</mapper>

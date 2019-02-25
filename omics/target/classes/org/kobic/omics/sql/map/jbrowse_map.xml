@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	 
+<mapper namespace="org.kobic.omics.jbrowse.mapper.JBrowseMapper">
+
+	<!-- JBrowseMap -->
+	<resultMap id="JBrowseMap" type="org.kobic.omics.jbrowse.vo.JBrowseVo">
+		<result property="taxId" column="taxId"/>
+		<result property="jbrowse" column="jbrowse"/>
+		<result property="organism" column="organism"/>
+		<result property="refSeqAssemblyID" column="refSeqAssemblyID"/>
+		<result property="genomicfnaLocation" column="genomicfnaLocation"/>
+	</resultMap>
+	
+	<!-- JBrowse의 url에 필요한 kingdom, taxId, version을 찾는 쿼리 -->
+ 	<select id="getJBrowseUrl"  parameterType="String" resultMap="JBrowseMap" >
+ 	 	SELECT 
+			JBrowse,
+			CONCAT(SUBSTRING_INDEX(RefSeqAssemblyID,' ',1),'_',AssemblyName) as 'refSeqAssemblyID',
+	
+			if (SUBSTRING_INDEX(SUBSTRING_INDEX(GenomicfnaLocation,'/',6),'/',-1)='bacteria',
+			case
+			when (JBrowse &lt; 35000) then 	'bacteria/bacteria_1'
+			when (JBrowse &lt; 150000) then 'bacteria/bacteria_2'
+			when (JBrowse &lt; 400000) then 'bacteria/bacteria_3'
+			when (JBrowse &lt; 1000000) then 'bacteria/bacteria_4'
+			when (JBrowse &lt; 1250000) then 'bacteria/bacteria_5'
+			else 'bacteria_6'
+			end
+			,SUBSTRING_INDEX(SUBSTRING_INDEX(GenomicfnaLocation,'/',6),'/',-1)) as 'genomicfnaLocation'
+			,Organism
+			,taxId
+		FROM NEW_pri_assemblyreport
+		WHERE TaxId = #{taxId}
+	</select>
+</mapper>

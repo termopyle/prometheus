@@ -1,0 +1,173 @@
+@charset "utf-8";
+
+#sitewrapper { width:100%; padding:0; margin:0 auto; }
+.main_bg { background:url(../images/main/main_bg.gif) top repeat-x;}
+
+/* skip */
+.skipNavigation {margin:0px;padding:0px;list-style:none;position:absolute;left:0px;top:0px;width:200px;}
+.skipNavigation a {display:block;position:absolute;left:-2000px;top:0px;text-align:center;font-weight:bold;}
+.skipNavigation a:hover,
+.skipNavigation a:focus,
+.skipNavigation a:active {background:#777;color:#fff;border:1px solid #fff;padding:5px 10px 4px 10px;position:absolute;top:0px;left:0px;z-index:100;}
+
+
+/* 전체 감싸기 */
+#wrap {width:980px; margin:0 auto; padding:0; }
+
+
+/* 헤더 : 로고, 탑메뉴, 글로벌메뉴, 전체메뉴  */
+#header { width:980px; height:110px; margin:0 auto; }
+#header:after { content:"";display:block;clear:both;}
+#header h1 a {display:inline-block; height:18px; font-size:25px; color:#222; font-weight:bold; letter-spacing:-0.03em; text-decoration:none; padding:21px 0;} /*로고*/
+#header h1 span { font-size:13px; color:#555; margin-left:8px; font-weight:normal;}
+
+
+/* 메뉴 */
+#tmbox { width:980px; height:50px; margin:0 auto; }
+#tmenu { display:inline-block;}
+#tmenu li { float:left; font-size:17px; font-weight:bold;}
+#tmenu li:first-child a { margin-left:0;}
+#tmenu a{ color:#fff; padding:16px 4px 11px 4px; margin:0 32px; float:left;}
+#tmenu a:hover { color:#2cbfa8; border-bottom:5px solid #2cbfa8;  text-decoration:none;}
+#tmenu li.last a{ margin-right:0} 
+
+
+/* 이미지 영역 */
+#mainV { position:absolute; width:1500px; height:250px; overflow:hidden; margin-left:-260px}
+.sliderbutton { position:absolute; margin-top:144px; z-index:1;}
+.Bleft { position:relative; width:26px; margin-left:20px; top:-32px;}
+.Bright { position:relative; width:26px; margin-left:1454px; top:-202px; *top:-325px;}
+.sliderbutton img {cursor:pointer}
+#slider {float:left; position:relative; width:1500px; height:250px; display:block; margin-top:-170px;}
+#slider ul {position:absolute; list-style:none; top:0; left:0}
+#slider li {float:left; width:1500px; height:250px;}
+#slider span { position:absolute; top:69px; margin-left:79px; font-size:13px; z-index:2; line-height:26px; letter-spacing:-0.05em; color:#fff;background:url(../images/main/main_bg.png) ; padding:14px 20px;}
+#slider .color01 { color:#aec9ff; border-bottom:1px solid #aec9ff; font-size:22px; line-height:30px; }
+#slider .color02 { color:#23b0c1; font-size:27px; line-height:35px;}
+#slider .color03 { color:#1990eb; font-size:27px; line-height:35px;}
+#slider .color04 { color:#47af80; font-size:27px; line-height:35px;}
+#slider .color05 { color:#aec9ff; border-bottom:1px solid #aec9ff; font-size:17px; line-height:30px; }
+#slider .color06  { color:#47b0d2; font-size:27px; line-height:35px;}
+#slider a.sliderbtn{ position:absolute; top:205px; left:79px; color:#fff; background:#5a83d7; border:solid 1px #5075bf; font-size:14px; line-height:26px; font-weight:bold; padding:1px 30px; display:inline-block; margin-top:14px;}
+#slider a.sliderbtn02{ position:absolute; top:205px; left:1058px; color:#fff; background:#23b0c1; border:solid 1px #229eb3; font-size:14px; line-height:26px; font-weight:bold; padding:1px 30px; display:inline-block; margin-top:14px;}
+.pagination { position:absolute; margin:-115px 0 0 730px; z-index:4; *margin:-213px 0 0 470px;}
+.pagination li {float:left; cursor:pointer; padding:7px 7px; *padding:1px 7px; background:#d5d5dd; border:1px solid #bbb; margin:0 10px 0 0; text-align:center;}
+.pagination li:hover {border:1px solid #5075bf; background:#5a83d7; }
+li.current {border:1px solid #5075bf; background:#5a83d7;}
+
+
+/* 메인컨텐츠영역 */
+#col1 { width:980px; height:503px; margin-bottom:30px;}
+#col2 { width:620px; height:503px; float:left;}
+#col3 { width:310px; height:503px; float:right; }
+#col4 { width:980px; height:70px; margin-bottom:30px;}
+#col5 { width:980px; height:56px; margin-bottom:30px;}
+
+
+/* 생명정보 등록형태 */
+#col1 h3 { font-size:17px; line-height:20px; color:#474e61; padding-left:12px; border-left:4px solid #474e61; letter-spacing:-0.05em;}
+#col1 h3 span { font-size:15px; color:#4869bc; margin-left:10px; }
+.shape dl { display:inline-block; width:302px; *float:left; *margin:0 2px 5px 0;}
+.shape dl.lineh18 dd { line-height:18px;}
+.shape dl.lineh21 dd { line-height:21px;}
+.shape dt { color:#fff; width:95px; text-align:center; vertical-align:middle; float:left; font-size:15px; line-height:18px; font-weight:bold;}
+.shape dd { position:relative; background:#edeef0; float:right; padding-left:13px; width:194px;}
+.shape .more { position:absolute; top:471px; margin-left:575px; *margin-left:-50px; color:#4869bc; font-size:11px; display:block; font-weight:bold;}
+.shape dt.shape1 { padding:82px 0; background:url(../images/main/shape_bg1.gif) repeat-y;}
+.shape dt.shape2 { padding:64px 0; background:url(../images/main/shape_bg2.gif) repeat-y;}
+.shape dt.shape3 { padding:46px 0; background:url(../images/main/shape_bg3.gif) repeat-y;}
+.shape dt.shape4 { padding:46px 0; background:url(../images/main/shape_bg4.gif) repeat-y;}
+.shape dt.shape5 { padding:46px 0; background:url(../images/main/shape_bg5.gif) repeat-y;}
+.shape dt.shape6 { padding:55px 0; background:url(../images/main/shape_bg6.gif) repeat-y;}
+
+
+/* 생명정보 등록현황 */
+.registform { margin-top:15px; width:308px; border:#ddd solid 1px;}
+.registform h4 { background:#cddaf3; color:#474e61; font-size:13px; line-height:30px; padding:0 20px;}
+.registformtree { height:224px; overflow:auto; line-height:16px; padding-left:20px}
+.treeview, .treeview ul { padding:0; margin-top:10px; list-style:none;}
+.treeview ul { background-color:white; margin-top:4px;}
+.treeview .hitarea { background:url(../images/main/treeview-default.gif) -64px -25px no-repeat; height:16px; width:16px; margin-left:-16px; float:left; cursor:pointer;}
+/* fix for IE6 */
+* html .hitarea { display:inline; float:none;}
+.treeview li {  margin:0; padding:2px 0pt 3px 16px;}
+.treeview a.selected { background-color:#eee;}
+#treecontrol { margin:1em 0; display:none;}
+.treeview .hover { color:#23b0c1; cursor:pointer;}
+.treeview li { background:url(../images/main/treeview-default-line.gif) 0 0 no-repeat;}
+.treeview li.collapsable,
+.treeview li.expandable { background-position:0 -176px;}
+.treeview .expandable-hitarea { background-position:-80px -3px;}
+.treeview li.last { background-position:0 -1766px}
+.treeview li.lastCollapsable,
+.treeview li.lastExpandable { background-image:url(../images/main/treeview-default.gif);}  
+.treeview li.lastCollapsable { background-position:0 -111px}
+.treeview li.lastExpandable { background-position:-32px -67px}
+.treeview div.lastCollapsable-hitarea,
+.treeview div.lastExpandable-hitarea { background-position:0;}
+#sidetreecontrol { position:absolute; top:513px; margin-left:165px;}
+#sidetreecontrol a { color:#4869bc;}
+
+.registyear { width:308px; border:#ddd solid 1px; background:url(../images/main/registyear_bg.gif) bottom no-repeat; margin-top:-1px;}
+.registyear h4 { background:#cddaf3; color:#474e61; font-size:13px; line-height:30px; padding:0 20px;}
+.registyear li { line-height:30px; display:inline-block; width:152px; *float:left;}
+.registyear li  a  { padding:0 20px; display:block;}
+.registyear li  a:hover{  padding:0 20px;color:#23b0c1; display:block; text-decoration:none;}
+.registyear li span { float:right; *margin:-30px 20px 0 0;}
+
+
+/* 생명정보 등록현황
+.registform { margin-top:15px; width:308px; border:#ddd solid 1px; background:url(../images/main/registform_bg.gif) 0 29px repeat-x;}
+.registform h4 { background:#cddaf3; color:#474e61; font-size:13px; line-height:29px; padding:0 20px;}
+.registform li { line-height:26px; }
+.registform li a { padding:0 20px; border:#fff 1px solid; display:block;}
+.registform li a:hover{ padding:0 20px; border:#5075bf 1px solid; display:block; color:#5075bf;}
+.registform li span { float:right; *margin:-30px 20px 0 0;}
+.registform li span.text1 { position:relative; top:-7px; float:none; line-height:16px;}
+.registform li span.text2 { position:relative; top:-15px; line-height:16px; *top:0;}
+.registyear { width:308px; border:#ddd solid 1px; background:url(../images/main/registyear_bg.gif) bottom no-repeat; margin-top:-1px;}
+.registyear h4 { background:#cddaf3; color:#474e61; font-size:13px; line-height:30px; padding:0 20px;}
+.registyear li { line-height:30px; display:inline-block; width:152px; *float:left;}
+.registyear li  a  { padding:0 20px; display:block;}
+.registyear li  a:hover{  padding:0 20px;color:#23b0c1; display:block; text-decoration:none;}
+.registyear li span { float:right; *margin:-30px 20px 0 0;}
+*/
+
+
+
+/* 메인 버튼 */
+.mainbtn { width:980px; height:68px; border:1px  solid #ddd;}
+.mainbtn li { float:left}
+.mainbtn a { height:48px; display:inline-block; width:276px; padding:10px 25px;}
+.mainbtn a:hover { height:48px; color:#fff; text-decoration:none; display:inline-block;width:276px; padding:10px 25px}
+.mainbtn span {display:block; font-size:11px; padding-top:17px; letter-spacing:-0.01em}
+.mainbtn strong { font-size:17px; font-weight:bold; color:#474e61; line-height:17px; margin-right:10px; }
+.mainbtn a:hover strong { color:#fff;}
+.mainbtn .manual { background:url(../images/main/manual1.gif) 53px 11px no-repeat #f9f9f9; border-right:solid 1px #ddd;}
+.mainbtn .manual a:hover{  background:url(../images/main/manual2.gif) 53px 11px no-repeat #5a83d7;}
+.mainbtn .manual span { padding-left:91px}
+.mainbtn .down { background:url(../images/main/down1.gif) 25px 11px no-repeat #f9f9f9; border-right:solid 1px #ddd; }
+.mainbtn .down a:hover{ background:url(../images/main/down2.gif) 25px 11px no-repeat #23b0c1; }
+.mainbtn .down span { padding-left:63px}
+.mainbtn .yt { background:url(../images/main/yt1.gif) 51px 11px no-repeat #f9f9f9;}
+.mainbtn .yt a:hover{ background:url(../images/main/yt2.gif) 51px 11px no-repeat #1990eb;}
+.mainbtn .yt span { padding-left:89px}
+
+
+/* 링크 */
+.link { background:url(../images/main/link_bg.gif) no-repeat; padding:10px 15px 12px 15px;}
+.link li { display:inline; padding:0 13px;}
+
+
+/* 하단 */
+#footer { width:980px; margin:0 auto; border-top:2px #999 solid; height:65px; padding-top:21px;}
+#footer .copy_logo { display:inline-block; float:left; padding-right:50px; margin-top:-7px;}
+#footer address { font-size:12px; font-style:normal; color:#888; line-height:17px; margin-top:5px;}
+
+
+/* 서브 */
+.subcon {width:880px; margin:0 auto; padding:50px 0 80px 0; line-height:21px;}
+.subcon h3 { clear:both; color:#444; letter-spacing:-0.05em; background:url(../images/sub/h3_bg.gif) bottom repeat-x; margin-bottom:40px; height:55px; padding-top:10px;}
+.subcon h3 span { font-size:30px; line-height:30px;border-top:4px solid #5a83d7; padding-top:4px;}
+/*.con a:hover { color:#1ca0de}*/
+.subcon h4 { clear:both; font-size:15px; letter-spacing:-0.03em; background:url(../images/sub/h4.gif) left top no-repeat; padding-top:10px; margin-bottom:10px;}

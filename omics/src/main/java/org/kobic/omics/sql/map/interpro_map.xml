@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	 
+<mapper namespace="org.kobic.omics.interpro.mapper.InterproMapper">
+
+    <resultMap id="GeneSearchVoMap" type="org.kobic.omics.interpro.vo.GeneSearchVo">
+    	<result property="idx" column="idx"/>
+        <result property="tax_id" column="tax_id"/>
+        <result property="species" column="species"/>
+		<result property="assembly_accession" column="assembly_accession"/>
+		<result property="assembly" column="assembly_accession"/>
+		<result property="protein_accession_version" column="protein_accession_version"/>
+		<result property="protein_length" column="protein_length"/>
+		<result property="db" column="db"/>
+		<result property="db_id" column="db_id"/>
+		<result property="db_desc" column="db_desc"/>
+		<result property="link_url" column="link_url"/>
+		<result property="start" column="start"/>
+		<result property="end" column="end"/>
+		<result property="evalue" column="evalue"/>
+		<result property="ipr_id" column="ipr_id"/>
+		<result property="ipr_desc" column="ipr_desc"/>
+		<result property="go_term" column="go_term"/>
+		<result property="type" column="type"/>
+    </resultMap>
+    
+	<resultMap id="GeneSearchVoMapWithCollection" type="org.kobic.omics.interpro.vo.GeneSearchVo">
+    	<result property="idx" column="idx"/>
+        <result property="tax_id" column="tax_id"/>
+        <result property="species" column="species"/>
+		<result property="assembly_accession" column="assembly_accession"/>
+		<result property="assembly" column="assembly_accession"/>
+		<result property="protein_accession_version" column="protein_accession_version"/>
+		<result property="protein_length" column="protein_length"/>
+		<result property="db" column="db"/>
+		<result property="db_id" column="db_id"/>
+		<result property="db_desc" column="db_desc"/>
+		<result property="link_url" column="link_url"/>
+		<result property="start" column="start"/>
+		<result property="end" column="end"/>
+		<result property="evalue" column="evalue"/>
+		<result property="ipr_id" column="ipr_id"/>
+		<result property="ipr_desc" column="ipr_desc"/>
+		<result property="go_term" column="go_term"/>
+		<result property="type" column="type"/>
+		<!-- <collection property="domains" column="{tax_id=tax_id, assembly_accession=assembly_accession, protein_accession_version=protein_accession_version}" javaType="java.util.ArrayList" ofType="org.kobic.omics.interpro.vo.GeneSearchVo" select="getDomainByProtein"/> -->
+    </resultMap>
+    
+    <resultMap id="InterproVoMap" type="org.kobic.omics.interpro.vo.InterproVo">
+    	<result property="idx" column="idx"/>
+        <result property="tax_id" column="tax_id"/>
+        <result property="assembly_accession" column="assembly_accession"/>
+        <result property="protein_accession_version" column="protein_accession_version"/>
+        <result property="ipr_id" column="ipr_id"/>
+        <result property="ord" column="ord"/>
+        <result property="species" column="species"/>
+        <result property="length" column="length"/>
+        <result property="ipr_terms" column="ipr_terms"/>
+    </resultMap>
+ <!--  
+    <resultMap id="DomainVoMap" type="org.kobic.omics.interpro.vo.DomainVo">
+    	<result property="idx" column="idx"/>
+        <result property="tax_id" column="tax_id"/>
+        <result property="species" column="species"/>
+        <result property="assembly_accession" column="assembly_accession"/>
+        <result property="assembly" column="assembly"/>
+        <result property="protein_accession_version" column="protein_accession_version"/>
+        <result property="protein_length" column="protein_length"/>
+        <result property="db" column="db"/>
+        <result property="db_id" column="db_id"/>
+        <result property="db_desc" column="db_desc"/>
+        <result property="link_url" column="link_url"/>
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+        <result property="evalue" column="evalue"/>
+        <result property="ipr_id" column="ipr_id"/>
+        <result property="ipr_desc" column="ipr_desc"/>
+        <result property="go_term" column="go_term"/>
+    </resultMap>
+-->
+    <resultMap id="domainVoMap" type="org.kobic.omics.viewer.vo.DomainVo">
+		<result property="no" column="no" />
+		<result property="db" column="db" />
+		<result property="db_id" column="db_id" />
+		<result property="db_desc" column="db_desc" />
+		<result property="link_url" column="link_url" />
+		<result property="start" column="start" />
+		<result property="end" column="end" />
+		<result property="evalue" column="evalue" />
+		<result property="ipr_id" column="ipr_id" />
+		<result property="ipr_desc" column="ipr_desc" />	
+		<result property="go" column="go" />
+	</resultMap>
+	
+	
+	<resultMap id="taxIdVoMap" type="org.kobic.omics.viewer.vo.TaxIdVo">
+		<result property="tax_id" column="tax_id" />
+		<result property="kingdom" column="kingdom" />
+		<result property="cnt" column="cnt"/>
+	</resultMap>
+	
+	<resultMap id="IprDomainTypeMap" type="org.kobic.omics.interpro.vo.IprDomainTypeVo">
+		<result property="id" column="id" />
+		<result property="type" column="type" />
+	</resultMap>
+	
+	
+<!-- 	
+	<resultMap id="OmicsModel" type="org.kobic.shark.thrift.service.OmicsModel">
+		<result property="taxonomyID" column="taxonomyID" />
+		<result property="assemblyID" column="assemblyID" />
+		<result property="proteinID" column="proteinID" />
+		<result property="annotationAccession" column="annotationAccession" />
+		<result property="domainStart" column="domainStart" />
+		<result property="domainEnd" column="domainEnd" />
+	</resultMap>
+  -->
+  
+  	<resultMap id="OmicsIPRVoMap" type="org.kobic.omics.interpro.vo.OmicsIPRVo">
+		<result property="taxonomyID" column="tax_id" />
+		<result property="assemblyID" column="assembly_accession" />
+		<result property="proteinID" column="protein_accession_version" />
+		<result property="annotationAccession" column="ipr_id" />
+		<result property="domainStart" column="start" />
+		<result property="domainEnd" column="end" />
+	</resultMap>
+	
+	
+	<resultMap id="TaxIdWithDbVo" type="org.kobic.omics.interpro.vo.TaxIdWithDbVo">
+		<result property="db" column="db" />
+		<result property="result" column="result" />
+	</resultMap>
+	
+	<resultMap id="RepresentativeVo" type="org.kobic.omics.interpro.vo.RepresentativeVo">
+		<result property="taxID" column="TaxID" />
+		<result property="organism" column="organism" />
+		<result property="refSeqAssemblyID" column="RefSeqAssemblyID" />
+		<result property="assemblyName" column="AssemblyName" />
+		<result property="geneID" column="GeneID" />
+		<result property="proteinID" column="ProteinID" />
+	</resultMap>
+	
+	<resultMap id="SequenceDownloadVo" type="org.kobic.omics.interpro.vo.SequenceDownloadVo">
+		<result property="taxID" column="TaxID" />
+		<result property="organism" column="organism" />
+		<result property="refSeqAssemblyID" column="RefSeqAssemblyID" />
+		<result property="proteinID" column="ProteinID" />
+		<result property="sequence" column="Seq" />
+	</resultMap>
+  
+    <select id="getInterpro" parameterType="java.util.Map" resultMap="InterproVoMap">
+		SELECT
+			a.idx,
+			a.tax_id,
+			a.assembly_accession,
+			a.protein_accession_version,
+			a.ipr_id,
+			a.protein_length as length,
+			a.species,
+			b.ord,
+			GROUP_CONCAT(CONCAT(start, '-', end) ORDER by start ) as 'ipr_terms'
+		FROM (
+			SELECT 
+				a.idx, a.tax_id, a.assembly_accession, a.protein_accession_version, a.ipr_id, a.start, a.end, a.protein_length, a.species
+			FROM prometheus_db.TMP_interpro a, (
+				SELECT tax_id, assembly_accession, protein_accession_version FROM (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_id FROM prometheus_db.TMP_interpro
+					WHERE ipr_id IN (${ipr_ids})
+					GROUP BY tax_id, assembly_accession, protein_accession_version, ipr_id
+				) a
+				GROUP BY tax_id, assembly_accession, protein_accession_version
+				HAVING count(*) > #{ipr_ids_counts}
+			) b
+			WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+			AND ipr_id IN (${ipr_ids})
+			ORDER BY a.tax_id, a.assembly_accession, a.protein_accession_version, a.ipr_id, a.start
+		) a, (${sub_query}) b
+		WHERE a.ipr_id=b.ipr_id
+		GROUP BY a.tax_id, a.assembly_accession, a.protein_accession_version, b.ord
+    </select>
+    
+    <select id="getDomainByProtein" parameterType="java.util.Map" resultMap="GeneSearchVoMap">
+    	SELECT
+			a.idx
+			, b.tax_id
+			, b.species
+			, b.assembly_accession
+			, b.assembly
+			, b.protein_accession_version
+			, a.protein_length
+			, a.db
+			, a.db_id
+			, a.db_desc
+			, a.link_url
+			, a.start
+			, a.end
+			, a.evalue
+			, a.ipr_id
+			, a.ipr_desc
+			, a.go_term
+		FROM InterproScan_Refseq a, (
+			SELECT * FROM InterproScan_Refseq_Unique_Protein
+			WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+		) b
+		WHERE a.basic_idx=b.id
+		AND a.idx BETWEEN b.idx_start AND b.idx_end
+		union ALL
+		select a.* from InterproScan_Ensembl a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Ensembl_Unique_Protein
+			WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_Phytozome a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Phytozome_Unique_Protein
+			WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_Solgenomics a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_Solgenomics_Unique_Protein
+			WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		union all
+		select a.* from InterproScan_TheOthers a, (
+			select tax_id, assembly_accession, protein_accession_version, ipr_terms from InterproScan_TheOthers_Unique_Protein
+			WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+		) b
+		where a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		<!-- ORDER BY start -->
+    </select>
+    
+ 	<select id="getDomainByProteinWithList" parameterType="java.util.Map" resultMap="GeneSearchVoMap">
+    	SELECT
+			a.idx
+			, b.tax_id
+			, b.species
+			, b.assembly_accession
+			, b.assembly
+			, b.protein_accession_version
+			, a.protein_length
+			, a.db
+			, a.db_id
+			, a.db_desc
+			, a.link_url
+			, a.start
+			, a.end
+			, a.evalue
+			, a.ipr_id
+			, a.ipr_desc
+			, a.go_term
+			, c.type
+			, 'RefSeq' AS ref_db
+		FROM InterproScan_Refseq a, (
+			SELECT a.* FROM InterproScan_Refseq_Unique_Protein a,
+			( 
+			<if test="proteins == null">
+				SELECT null as tax_id, null as assembly_accession, null as protein_accession_version
+			</if>
+			<if test="proteins != null">
+			<foreach collection="proteins" item="item" separator="UNION ALL">
+				SELECT
+				#{item.tax_id} as tax_id,
+				#{item.assembly_accession} as assembly_accession,
+				#{item.protein_accession_version} as protein_accession_version
+			</foreach>
+			</if>
+			) b
+			WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+		) b, InterproDomainList c
+		WHERE a.basic_idx=b.id
+		AND a.idx BETWEEN b.idx_start AND b.idx_end
+		AND a.ipr_id=c.id
+		<!--AND c.type in ('Domain', 'Repeat')-->
+		union ALL
+		SELECT a.*, c.type, 'Ensembl' AS ref_db FROM InterproScan_Ensembl a, (
+			select a.tax_id, a.assembly_accession, a.protein_accession_version, a.ipr_terms from InterproScan_Ensembl_Unique_Protein a, 
+			( 
+			<if test="proteins == null">
+				SELECT null as tax_id, null as assembly_accession, null as protein_accession_version
+			</if>
+			<if test="proteins != null">
+			<foreach collection="proteins" item="item" separator="UNION ALL">
+				SELECT
+				#{item.tax_id} as tax_id,
+				#{item.assembly_accession} as assembly_accession,
+				#{item.protein_accession_version} as protein_accession_version
+			</foreach>
+			</if>
+			) b
+			WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+		) b, InterproDomainList c
+		WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		AND a.ipr_id=c.id
+		<!--AND c.type in ('Domain', 'Repeat')-->
+		UNION ALL
+		SELECT a.*, c.type, 'Phytozome' AS ref_db FROM InterproScan_Phytozome a, (
+			SELECT a.tax_id, a.assembly_accession, a.protein_accession_version, a.ipr_terms FROM InterproScan_Phytozome_Unique_Protein a,
+			( 
+			<if test="proteins == null">
+				SELECT null as tax_id, null as assembly_accession, null as protein_accession_version
+			</if>
+			<if test="proteins != null">
+			<foreach collection="proteins" item="item" separator="UNION ALL">
+				SELECT
+				#{item.tax_id} as tax_id,
+				#{item.assembly_accession} as assembly_accession,
+				#{item.protein_accession_version} as protein_accession_version
+			</foreach>
+			</if>
+			) b
+			WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+		) b, InterproDomainList c
+		WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		AND a.ipr_id=c.id
+		<!--AND c.type in ('Domain', 'Repeat')-->
+		UNION ALL
+		SELECT a.*, c.type, 'Sol Genomics' AS ref_db FROM InterproScan_Solgenomics a, (
+			SELECT a.tax_id, a.assembly_accession, a.protein_accession_version, a.ipr_terms FROM InterproScan_Solgenomics_Unique_Protein a,
+			(
+			<if test="proteins == null">
+				SELECT null as tax_id, null as assembly_accession, null as protein_accession_version
+			</if> 
+			<if test="proteins != null">
+			<foreach collection="proteins" item="item" separator="UNION ALL">
+				SELECT
+				#{item.tax_id} as tax_id,
+				#{item.assembly_accession} as assembly_accession,
+				#{item.protein_accession_version} as protein_accession_version
+			</foreach>
+			</if>
+			) b
+			WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+		) b, InterproDomainList c
+		WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+		AND a.ipr_id=c.id
+		<!--AND c.type in ('Domain', 'Repeat')-->
+		UNION ALL
+		SELECT a.*, c.type, 'TheOthers' AS ref_db FROM InterproScan_TheOthers a, (
+			SELECT a.tax_id, a.assembly_accession, a.protein_accession_version, a.ipr_terms FROM InterproScan_TheOthers_Unique_Protein a,
+			(
+			<if test="proteins == null">
+				SELECT null as tax_id, null as assembly_accession, null as protein_accession_version
+			</if>
+			<if test="proteins != null">
+			<foreach collection="proteins" item="item" separator="UNION ALL">
+				SELECT
+				#{item.tax_id} as tax_id,
+				#{item.assembly_accession} as assembly_accession,
+				#{item.protein_accession_version} as protein_accession_version
+			</foreach>
+			</if>
+			) b
+			WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+		) b, InterproDomainList c
+		WHERE a.tax_id=b.tax_id AND a.assembly_accession=b.assembly_accession AND a.protein_accession_version=b.protein_accession_version
+		AND a.ipr_id=c.id
+		<!--AND c.type in ('Domain', 'Repeat')-->
+		ORDER BY tax_id, start
+    </select>
+    
+    <select id="getUniqueProtein" parameterType="java.util.Map" resultMap="GeneSearchVoMap">
+		SELECT
+			(CASE CONCAT(a.tax_id, a.assembly_accession, a.protein_accession_version) WHEN @protein_id THEN @rownum:=@rownum ELSE @rownum:=@rownum+1 end) AS rownum,
+			id, tax_id, assembly_accession, protein_accession_version, ipr_terms
+		FROM (
+			SELECT a.* FROM (
+				SELECT id, tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Refseq_Unique_Protein
+				WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+				${subQuery}
+				UNION ALL
+				SELECT id, tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Ensembl_Unique_Protein
+				WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+				${subQuery}
+				UNION ALL
+				SELECT id, tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Phytozome_Unique_Protein
+				WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+				${subQuery}
+				UNION ALL
+				SELECT id, tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Solgenomics_Unique_Protein
+				WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+				${subQuery}
+				UNION ALL
+				SELECT id, tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_TheOthers_Unique_Protein
+				WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+				${subQuery}
+			) a, (SELECT @protein_id:='', @rownum:=0) b
+			ORDER BY a.tax_id, a.assembly_accession, a.protein_accession_version, a.id
+		) a
+    	<!-- SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Refseq_Unique_Protein
+		WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+		${subQuery}
+		UNION ALL
+		SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Ensembl_Unique_Protein
+		WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+		${subQuery}
+		UNION ALL
+		SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Phytozome_Unique_Protein
+		WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+		${subQuery}
+		UNION ALL
+		SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Solgenomics_Unique_Protein
+		WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+		${subQuery}
+		UNION ALL
+		SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_TheOthers_Unique_Protein
+		WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+		${subQuery} -->
+    </select>
+    
+    <select id="getGeneSearch" parameterType="java.util.Map" resultMap="GeneSearchVoMap">
+		SELECT
+			a.idx
+			, b.tax_id
+			, b.species
+			, b.assembly_accession
+			, b.assembly
+			, b.protein_accession_version
+			, a.protein_length
+			, a.db
+			, a.db_id
+			, a.db_desc
+			, a.link_url
+			, a.start
+			, a.end
+			, a.evalue
+			, a.ipr_id
+			, a.ipr_desc
+			, a.go_term
+		FROM InterproScan_Refseq a, (
+			select * FROM InterproScan_Refseq_Unique_Protein
+			WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+			${subQuery}
+		) b
+		WHERE a.basic_idx=b.id
+		and a.idx between b.idx_start and b.idx_end
+		UNION ALL
+		SELECT a.* FROM InterproScan_Ensembl a, (
+			SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Ensembl_Unique_Protein
+			WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+			${subQuery}
+		) b
+		WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		UNION ALL
+		SELECT a.* FROM InterproScan_Phytozome a, (
+			SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Phytozome_Unique_Protein
+			WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+			${subQuery}
+		) b
+		WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		UNION ALL
+		SELECT a.* FROM InterproScan_Solgenomics a, (
+			SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Solgenomics_Unique_Protein
+			WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+			${subQuery}
+		) b
+		WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+		UNION ALL
+		SELECT a.* FROM InterproScan_TheOthers a, (
+			SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_TheOthers_Unique_Protein
+			WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+			${subQuery}
+		) b
+		WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+    </select>
+
+    <select id="getHitProteinTotalCounts" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT
+			CAST(rownum AS UNSIGNED) rownum
+		FROM (
+			SELECT
+				(CASE CONCAT(a.tax_id, a.assembly_accession, a.protein_accession_version) WHEN @tax_id THEN @rownum:=@rownum ELSE @rownum:=@rownum+1 end) AS rownum
+				, (@tax_id :=concat(a.tax_id, a.assembly_accession, a.protein_accession_version)) var
+				, a.*
+			FROM (
+				SELECT
+					a.idx
+					, b.tax_id
+					, b.species
+					, b.assembly_accession
+					, b.assembly
+					, b.protein_accession_version
+					, a.protein_length
+					, a.db
+					, a.db_id
+					, a.db_desc
+					, a.link_url
+					, a.start
+					, a.end
+					, a.evalue
+					, a.ipr_id
+					, a.ipr_desc
+					, a.go_term
+				FROM InterproScan_Refseq a, (
+					select * FROM InterproScan_Refseq_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.basic_idx=b.id
+				and a.idx between b.idx_start and b.idx_end
+				UNION ALL
+				SELECT a.* FROM InterproScan_Ensembl a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Ensembl_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+				UNION ALL
+				SELECT a.* FROM InterproScan_Phytozome a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Phytozome_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+				UNION ALL
+				SELECT a.* FROM InterproScan_Solgenomics a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Solgenomics_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+				UNION ALL
+				SELECT a.* FROM InterproScan_TheOthers a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_TheOthers_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+			) a, (SELECT @tax_id:='', @rownum:=0) b
+			ORDER BY a.tax_id, a.assembly_accession, a.protein_accession_version, a.idx
+		) a
+		ORDER BY rownum DESC
+		LIMIT 1
+    </select>    
+    
+    <select id="getGeneSearchModified" parameterType="java.util.Map" resultMap="GeneSearchVoMap">
+		SELECT
+			rownum
+			, idx, tax_id, species, assembly_accession, assembly, protein_accession_version, protein_length, db, db_id, db_desc, link_url, start, end, evalue, ipr_id
+			, ipr_desc, go_term
+		FROM (
+			SELECT
+				(CASE CONCAT(a.tax_id, a.assembly_accession, a.protein_accession_version) WHEN @tax_id THEN @rownum:=@rownum ELSE @rownum:=@rownum+1 end) AS rownum
+				, (@tax_id :=concat(a.tax_id, a.assembly_accession, a.protein_accession_version)) var
+				, a.*
+			FROM (
+				SELECT
+					a.idx
+					, b.tax_id
+					, b.species
+					, b.assembly_accession
+					, b.assembly
+					, b.protein_accession_version
+					, a.protein_length
+					, a.db
+					, a.db_id
+					, a.db_desc
+					, a.link_url
+					, a.start
+					, a.end
+					, a.evalue
+					, a.ipr_id
+					, a.ipr_desc
+					, a.go_term
+				FROM InterproScan_Refseq a, (
+					select * FROM InterproScan_Refseq_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.basic_idx=b.id
+				and a.idx between b.idx_start and b.idx_end
+				UNION ALL
+				SELECT a.* FROM InterproScan_Ensembl a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Ensembl_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+				UNION ALL
+				SELECT a.* FROM InterproScan_Phytozome a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Phytozome_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+				UNION ALL
+				SELECT a.* FROM InterproScan_Solgenomics a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_Solgenomics_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+				UNION ALL
+				SELECT a.* FROM InterproScan_TheOthers a, (
+					SELECT tax_id, assembly_accession, protein_accession_version, ipr_terms FROM InterproScan_TheOthers_Unique_Protein
+					WHERE match(ipr_terms) against( #{ipr_ids} in boolean mode )
+					${subQuery}
+				) b
+				WHERE a.tax_id=b.tax_id and a.assembly_accession=b.assembly_accession and a.protein_accession_version=b.protein_accession_version
+			) a, (SELECT @tax_id:='', @rownum:=0) b
+			ORDER BY a.tax_id, a.assembly_accession, a.protein_accession_version, a.idx
+		) a
+		<if test="startIndex != null and pagingSize != null">
+			WHERE rownum BETWEEN ${startIndex} AND (${startIndex}+${pagingSize}-1)
+		</if>
+    </select>
+    
+    <select id="getDomain" parameterType="java.util.Map" resultMap="domainVoMap">
+    	SELECT
+    		idx as 'no',
+    		db,
+    		db_id,
+    		db_desc,
+    		link_url,
+    		start,
+    		end,
+    		evalue,
+    		ipr_id,
+    		ipr_desc,
+    		go_term as 'go'
+    	FROM prometheus_db.TMP_interpro
+    	WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+    	ORDER BY ipr_id, start
+    </select>
+    
+    <select id="getKingdomTablesByTaxId" parameterType="java.util.Map" resultMap="TaxIdWithDbVo">
+	    SELECT
+	    	db
+	    	, Kingdom as kingdom
+	    	,
+			CASE WHEN db='RefSeq' THEN
+				CASE WHEN Kingdom='bacteria' 		THEN 'NEW_pri_RefSeq_${type}_BACTERIA'
+				WHEN Kingdom='archaea' 				THEN 'NEW_pri_RefSeq_${type}_ARCHAEA'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'NEW_pri_RefSeq_${type}_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='plant' 				THEN 'NEW_pri_RefSeq_${type}_PLANT'
+				WHEN Kingdom='invertebrate' 		THEN 'NEW_pri_RefSeq_${type}_INVERTEBRATE'
+				WHEN Kingdom='fungi' 				THEN 'NEW_pri_RefSeq_${type}_FUNGI'
+				WHEN Kingdom='vertebrate_other' 	THEN 'NEW_pri_RefSeq_${type}_VERTEBRATE_OTHER'
+				WHEN Kingdom='protozoa' 			THEN 'NEW_pri_RefSeq_${type}_PROTOZOA'
+				END
+			WHEN db='Ensembl' THEN
+				CASE WHEN Kingdom='fungi' 			THEN 'NEW_pri_ensembl_${type}_FUNGI'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'NEW_pri_ensembl_${type}_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='invertebrate' 		THEN 'NEW_pri_ensembl_${type}_INVERTEBRATE'
+				WHEN Kingdom='vertebrate_other' 	THEN 'NEW_pri_ensembl_${type}_VERTEBRATE_OTHER'
+				END
+			WHEN db='Phytozome' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'NEW_pri_Phytozome_${type}_PLANT'
+				END
+			WHEN db='Sol Genomics' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'NEW_pri_Solgenomics_${type}_PLANT'
+				END
+			WHEN db='TheOthers' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'NEW_pri_TheOthers_${type}_PLANT'
+				END
+			END AS result
+		FROM prometheus_db.TaxId_with_info
+		WHERE TaxId=#{tax_id}
+    </select>
+
+    <select id="getProteinKingdomByTaxId" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			IFNULL((SELECT 
+				CASE WHEN Kingdom='bacteria' 		THEN 'NEW_pri_RefSeq_proteinfaa_BACTERIA'
+				WHEN Kingdom='archaea' 				THEN 'NEW_pri_RefSeq_proteinfaa_ARCHAEA'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'NEW_pri_RefSeq_proteinfaa_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='plant' 				THEN 'NEW_pri_RefSeq_proteinfaa_PLANT'
+				WHEN Kingdom='invertebrate' 		THEN 'NEW_pri_RefSeq_proteinfaa_INVERTEBRATE'
+				WHEN Kingdom='fungi' 				THEN 'NEW_pri_RefSeq_proteinfaa_FUNGI'
+				WHEN Kingdom='vertebrate_other' 	THEN 'NEW_pri_RefSeq_proteinfaa_VERTEBRATE_OTHER'
+				WHEN Kingdom='protozoa' 			THEN 'NEW_pri_RefSeq_proteinfaa_PROTOZOA'
+				END AS RESULT
+			FROM omics_portal_db.TaxId_with_info
+			WHERE TaxId=#{tax_id}), 'NEW_pri_TheOthers_proteinfaa_PLANT')
+	</select>
+	
+	<select id="getRnafnaKingdomByTaxId" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			IFNULL((SELECT
+				CASE WHEN Kingdom='plant' 			THEN 'NEW_pri_RefSeq_rnafna_PLANT'
+				WHEN Kingdom='invertebrate' 		THEN 'NEW_pri_RefSeq_rnafna_INVERTEBRATE'
+				WHEN Kingdom='fungi' 				THEN 'NEW_pri_RefSeq_rnafna_FUNGI'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'NEW_pri_RefSeq_rnafna_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='vertebrate_other' 	THEN 'NEW_pri_RefSeq_rnafna_VERTEBRATE_OTHER'
+				WHEN Kingdom='protozoa' 			THEN 'NEW_pri_RefSeq_rnafna_PROTOZOA'
+				END AS RESULT
+			FROM prometheus_db.TaxId_with_info
+			WHERE TaxId=#{tax_id} AND db='RefSeq'), 'NULL')
+	</select>
+
+	<select id="getSequence" parameterType="java.util.Map" resultType="java.lang.String">
+		<!-- SELECT
+			Seq
+		FROM ${kingdom_table_query}
+		WHERE TaxId=#{TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID} -->
+		SELECT
+			Seq
+		FROM NEW_pri_Integration_Proteinfaa
+		WHERE TaxId=#{TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+	</select>
+	
+	<select id="getSequence3" parameterType="java.util.Map" resultMap="SequenceDownloadVo">
+		SELECT
+			a.TaxId, a.organism, a.RefSeqAssemblyID, a.ProteinID, a.Seq, c.kingdom
+		FROM NEW_pri_Integration_Proteinfaa a, (
+		<foreach collection="proteins" item="item" separator="UNION ALL">
+			SELECT
+			#{item.tax_id} as TaxId,
+			#{item.assembly_accession} as RefSeqAssemblyID,
+			#{item.protein_accession_version} as ProteinID
+		</foreach>
+		) b, (select * from TaxId_with_info group by TaxId, kingdom) c
+		where a.TaxId=b.TaxId and a.RefSeqAssemblyID=b.RefSeqAssemblyID and a.ProteinID=b.ProteinID and a.TaxId=c.TaxId
+    </select>
+    
+	<select id="getCDS" parameterType="java.util.Map" resultType="java.lang.String">
+		<choose>
+			<when test="(db eq 'Ensembl'.toString())">
+<!-- 				SELECT 
+					a.Seq
+				FROM NEW_pri_ensembl_rnafna_${type} a, (
+					SELECT TaxId, RefSeqAssemblyID, LocusVersion, stable_id FROM NEW_pri_ensembl_proteinfaa_${type}
+					WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+				) b
+				WHERE a.TaxId=b.TaxId
+				AND a.RefSeqAssemblyID=b.RefSeqAssemblyID
+				AND a.stable_id=b.stable_id -->
+				SELECT 
+					a.Seq
+				FROM NEW_pri_ensembl_rnafna_${type} a
+				WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+			</when>
+			<when test="(db eq 'RefSeq'.toString())">
+				<choose>
+					<when test="(type eq 'BACTERIA'.toString() or type eq 'ARCHAEA'.toString())">
+						SELECT 
+							UPPER(a.Seq)
+						FROM NEW_pri_RefSeq_rnafna_${type} a
+						WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+						limit 1
+					</when>
+					<otherwise>
+						SELECT
+							UPPER(Seq) as 'CDS'
+						FROM NEW_pri_RefSeq_rnafna_${type}
+						WHERE (TaxId, RefSeqAssemblyID, mRNAID) IN (
+							SELECT
+								TaxId, RefSeqAssemblyID, mRNAID
+							FROM prometheus_db.Feature_Transcript
+							WHERE (TaxId, RefSeqAssemblyID, ID) IN (
+								SELECT
+									TaxId, RefSeqAssemblyID, parent
+								FROM prometheus_db.Feature_CDS
+								WHERE TaxId=${TaxId} and RefSeqAssemblyID=#{RefSeqAssemblyID} and ProteinID=#{ProteinID}
+								GROUP BY TaxId, RefSeqAssemblyID, parent 
+							)
+						)
+					</otherwise>
+				</choose>
+			</when>
+			<when test="(db eq 'Phytozome'.toString())">
+				SELECT 
+					a.Seq
+				FROM NEW_pri_Phytozome_transcript_${type} a
+				WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+			</when>
+			<when test="(db eq 'Sol Genomics'.toString())">
+				SELECT 
+					a.Seq
+				FROM NEW_pri_Solgenomics_transcript_${type} a
+				WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND TranscriptID=#{ProteinID}
+			</when>
+			<otherwise>
+				SELECT 
+					a.Seq
+				FROM NEW_pri_TheOthers_transcript_${type} a
+				WHERE TaxId=${TaxId} and RefSeqAssemblyID=#{RefSeqAssemblyID} AND TranscriptID=#{ProteinID}
+			</otherwise>
+		</choose>
+		
+		<!-- SELECT
+			Seq as 'CDS'
+		FROM ${kingdom_table_query}
+		WHERE (TaxId, RefSeqAssemblyID, mRNAID) IN (
+			SELECT
+				TaxId, RefSeqAssemblyID, mRNAID
+			FROM prometheus_db.Feature_Transcript
+			WHERE (TaxId, RefSeqAssemblyID, ID) IN (
+				SELECT
+					TaxId, RefSeqAssemblyID, parent
+				FROM prometheus_db.Feature_CDS
+				WHERE TaxId=#{TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ${ProteinIDField}=#{ProteinID}
+				GROUP BY TaxId, RefSeqAssemblyID, parent
+			)
+		) -->
+	</select>
+	
+	<select id="getCDS3" parameterType="java.util.Map" resultMap="SequenceDownloadVo">
+		SELECT
+			a.TaxId, a.organism, a.RefSeqAssemblyID, a.ProteinID, a.Seq, c.kingdom
+		FROM NEW_pri_Integration_rnafna a, (
+		<foreach collection="proteins" item="item" separator="UNION ALL">
+			SELECT
+			#{item.tax_id} as TaxId,
+			#{item.assembly_accession} as RefSeqAssemblyID,
+			#{item.protein_accession_version} as ProteinID
+		</foreach>
+		) b, (select * from TaxId_with_info group by TaxId, kingdom) c
+		where a.TaxId=b.TaxId and a.RefSeqAssemblyID=b.RefSeqAssemblyID and a.ProteinID=b.ProteinID and a.TaxId=c.TaxId
+    </select>
+    
+    <select id="getGeneIDFromRepAll" parameterType="java.util.Map" resultType="java.lang.String">
+    	SELECT 
+			GeneID
+		FROM ${repAllTable}
+		WHERE TaxId=${TaxId} AND RefSeqAssemblyID=#{RefSeqAssemblyID} AND ProteinID=#{ProteinID}
+    </select>
+    
+    <select id="getKingdomAndDB" parameterType="java.lang.String" resultMap="TaxIdWithDbVo">
+    	<!-- SELECT
+    		kingdom,
+    		db
+    	FROM prometheus_db.TaxId_with_info
+    	WHERE TaxId=#{tax_id} -->
+    	
+    	SELECT
+	    	db
+	    	, Kingdom as kingdom
+	    	,
+			CASE WHEN db='RefSeq' THEN
+				CASE WHEN Kingdom='bacteria' 		THEN 'RepresentativeAll_RefSeq_BACTERIA@Representative_RefSeq_BACTERIA'
+				WHEN Kingdom='archaea' 				THEN 'RepresentativeAll_RefSeq_ARCHAEA@Representative_RefSeq_ARCHAEA'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'RepresentativeAll_RefSeq_VERTEBRATE_MAMMALIAN@Representative_RefSeq_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='plant' 				THEN 'RepresentativeAll_RefSeq_PLANT@Representative_RefSeq_PLANT'
+				WHEN Kingdom='invertebrate' 		THEN 'RepresentativeAll_RefSeq_INVERTEBRATE@Representative_RefSeq_INVERTEBRATE'
+				WHEN Kingdom='fungi' 				THEN 'RepresentativeAll_RefSeq_FUNGI@Representative_RefSeq_FUNGI'
+				WHEN Kingdom='vertebrate_other' 	THEN 'RepresentativeAll_RefSeq_VERTEBRATE_OTHER@Representative_RefSeq_VERTEBRATE_OTHER'
+				WHEN Kingdom='protozoa' 			THEN 'RepresentativeAll_RefSeq_PROTOZOA@Representative_RefSeq_PROTOZOA'
+				END
+			WHEN db='Ensembl' THEN
+				CASE WHEN Kingdom='fungi' 			THEN 'RepresentativeAll_Ensembl_FUNGI@Representative_Ensembl_FUNGI'
+				WHEN Kingdom='vertebrate_mammalian' THEN 'RepresentativeAll_Ensembl_VERTEBRATE_MAMMALIAN@Representative_Ensembl_VERTEBRATE_MAMMALIAN'
+				WHEN Kingdom='invertebrate' 		THEN 'RepresentativeAll_Ensembl_INVERTEBRATE@Representative_Ensembl_INVERTEBRATE'
+				WHEN Kingdom='vertebrate_other' 	THEN 'RepresentativeAll_Ensembl_VERTEBRATE_OTHER@Representative_Ensembl_VERTEBRATE_OTHER'
+				END
+			WHEN db='Phytozome' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'RepresentativeAll_Phytozome_PLANT@Representative_Phytozome_PLANT'
+				END
+			WHEN db='Sol Genomics' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'RepresentativeAll_Solgenomics_PLANT@Representative_Solgenomics_PLANT'
+				END
+			WHEN db='TheOthers' THEN
+				CASE WHEN Kingdom='plant' 			THEN 'RepresentativeAll_TheOthers_PLANT@Representative_TheOthers_PLANT'
+				END
+			END AS result
+		FROM prometheus_db.TaxId_with_info
+		WHERE TaxId=#{tax_id}
+    </select>
+    
+    <select id="getProteinFromRep" parameterType="java.util.Map" resultMap="RepresentativeVo">
+	    SELECT DISTINCT * FROM (
+	    	SELECT
+	    		TaxID,
+	    		organism,
+	    		RefSeqAssemblyID,
+	    		AssemblyName,
+	    		GeneID,
+	    		ProteinID
+	    	FROM ${repTable}
+	    	WHERE BINARY(GeneID)=#{GeneID}
+	    	AND TaxID=#{TaxID}
+	    	AND RefSeqAssemblyID=#{RefSeqAssemblyID}
+    	) a
+    </select>
+    
+    <!-- getOmicsIpr 예제 데이터 뽑기위한 쿼리-->
+    <select id="getUniqueProteinId" parameterType="java.util.Map" resultMap="OmicsIPRVoMap">
+    	SELECT
+    		tax_id,
+    		assembly_accession,
+    		protein_accession_version,
+    		ipr_id,
+    		start,
+    		end
+    	FROM prometheus_db.TMP_interpro
+    	WHERE ipr_id IN (${ipr_ids})
+    </select>
+    
+    <select id="getLength" parameterType="java.util.Map" resultType="java.lang.String">
+    	SELECT
+    		distinct(protein_length) as protein_length
+    	FROM prometheus_db.TMP_interpro
+    	WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+    </select>
+    
+    <select id="getSpecies" parameterType="java.util.Map" resultType="java.lang.String">
+    	SELECT
+    		distinct(species) as species
+    	FROM prometheus_db.TMP_interpro
+    	WHERE tax_id=#{tax_id} AND assembly_accession=#{assembly_accession} AND protein_accession_version=#{protein_accession_version}
+    </select>
+
+    <select id="getKingdomInfoByTaxId" parameterType="java.util.Map" resultMap="taxIdVoMap">
+	    SELECT
+	    	b.tax_id as tax_id
+			, MAX(IFNULL(kingdom, 'NOT_CLASSIFIED')) as kingdom
+		FROM prometheus_db.TaxId_with_info a RIGHT OUTER JOIN (
+			<if test="tax_id == null">
+				SELECT null as tax_id
+			</if>
+			<if test="tax_id != null">
+				<foreach collection="tax_id" item="item" separator="UNION ALL">
+					SELECT #{item} AS tax_id
+				</foreach>
+			</if>
+		) b
+		ON a.TaxId=b.tax_id
+		GROUP BY b.tax_id
+    </select>
+    
+    <select id="getIprDomainInfo" parameterType="java.util.Map" resultMap="IprDomainTypeMap">
+	    SELECT
+			id, type
+		FROM InterproDomainList
+		WHERE id IN (
+			<if test="domainList != null">
+				<foreach collection="domainList" item="item" separator=",">
+					#{item}
+				</foreach>
+			</if>
+		)
+    </select>
+    
+    <select id="getKingdomInfoByTaxIdCount" parameterType="java.util.Map" resultMap="taxIdVoMap">
+    SELECT BB.kingdom, ifnull(cnt,'0') as cnt FROM 
+	   ( SELECT kingdom, count(*) as cnt FROM (
+	    SELECT
+	    	b.tax_id as tax_id
+			, MAX(IFNULL(kingdom, 'NOT_CLASSIFIED')) as kingdom
+		FROM prometheus_db.TaxId_with_info a RIGHT OUTER JOIN (
+			<if test="tax_id == null">
+				SELECT null as tax_id
+			</if>
+			<if test="tax_id != null">
+				<foreach collection="tax_id" item="item" separator="UNION ALL">
+					SELECT #{item} AS tax_id
+				</foreach>
+			</if>
+		) b
+		ON a.TaxId=b.tax_id
+		GROUP BY b.tax_id)A
+		GROUP BY kingdom )AA RIGHT OUTER JOIN 
+			(SELECT 1 as num ,'Archaea' as kingdom union
+			SELECT 2 as num ,'Bacteria' as kingdom union
+			SELECT 3 as num ,'Fungi' as kingdom union
+			SELECT 4 as num ,'Invertebrate' as kingdom union
+			SELECT 5 as num ,'Plant' as kingdom union
+			SELECT 6 as num ,'Protozoa' as kingdom union
+			SELECT 7 as num ,'Vertebrate_mammalian' as kingdom union
+			SELECT 8 as num ,'Vertebrate_other' as kingdom)BB
+			ON AA.kingdom=BB.kingdom
+		ORDER BY num
+    </select>
+<!--     <select id="getKingdomByTaxIdTotalCount" resultMap="taxIdVoMap">
+    	SELECT kingdom, count(*) as cnt FROM (
+			SELECT * FROM TaxId_with_info 
+			GROUP BY TaxId
+		)a GROUP BY kingdom
+		union all
+		SELECT 'ALL' as kingdom, count(*)as cnt FROM (
+			SELECT * FROM TaxId_with_info GROUP BY TaxId)a
+    </select> -->
+    <select id="getKingdomByTaxIdTotalCount" resultMap="taxIdVoMap">
+		SELECT
+			Kingdom as kingdom, count(*) as cnt
+		FROM (SELECT * FROM TaxId_with_info	GROUP BY TaxId)a
+		GROUP BY Kingdom
+		UNION ALL
+		SELECT 'ALL' AS kingdom, COUNT(distinct TaxId) AS cnt FROM TaxId_with_info
+    </select>
+</mapper>

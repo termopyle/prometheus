@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	 
+<mapper namespace="org.kobic.omics.report.mapper.ReportMapper">
+
+	<!-- resultMap -->
+	<resultMap id="AssemblyResultMap" type="org.kobic.omics.report.vo.AssemblyReportVo">
+		<result property="no" column="no"/>
+		<result property="taxId" column="TaxId"/>
+		<result property="organism" column="Organism"/>
+		<result property="refSeqAssemblyID" column="RefSeqAssemblyID"/>
+		<result property="assemblyName" column="AssemblyName"/>
+		<result property="description" column="Description"/>
+		<result property="submitter" column="Submitter"/>
+		<result property="depositDate" column="DepositDate"/>
+		<result property="bioSample" column="BioSample"/>
+		<result property="assemblyType" column="AssemblyType"/>
+		<result property="releaseType" column="ReleaseType"/>
+		<result property="assemblyLevel" column="AssemblyLevel"/>
+		<result property="genomeRepresentation" column="GenomeRepresentation"/>
+		<result property="genBankAssemblyID" column="GenBankAssemblyID"/>
+		<result property="identical" column="Identical"/>
+		<result property="genomicfnaLocation" column="GenomicfnaLocation"/>
+		<result property="rMoutLocation" column="RMoutLocation"/>
+		<result property="paralogLocation" column="ParalogLocation"/>
+		<result property="fileSize" column="FileSize"/>
+		<result property="geneCount" column="GeneCount"/>
+		<result property="jbrowse" column="JBrowse"/>
+		<result property="source" column="Source"/>
+		<result property="releaseVersion" column="Release_version"/>
+		<result property="releaseDate" column="ReleaseDate"/>
+		<result property="newTaxId" column="new_TaxId"/>
+	</resultMap>
+	
+	<resultMap id="AssemblyFilePathMap" type="org.kobic.omics.report.vo.AseemblyFilePathVo">
+		<result property="no" column="no"/>
+		<result property="taxId" column="TaxId"/>
+		<result property="organism" column="Organism"/>
+		<result property="refSeqAssemblyID" column="RefSeqAssemblyID"/>
+		<result property="assemblyName" column="AssemblyName"/>
+		<result property="description" column="Description"/>
+		<result property="submitter" column="Submitter"/>
+		<result property="depositDate" column="DepositDate"/>
+		<result property="bioSample" column="BioSample"/>
+		<result property="assemblyType" column="AssemblyType"/>
+		<result property="releaseType" column="ReleaseType"/>
+		<result property="assemblyLevel" column="AssemblyLevel"/>
+		<result property="genomeRepresentation" column="GenomeRepresentation"/>
+		<result property="genBankAssemblyID" column="GenBankAssemblyID"/>
+		<result property="identical" column="Identical"/>
+		<result property="genomicfnaLocation" column="GenomicfnaLocation"/>
+		<result property="rMoutLocation" column="RMoutLocation"/>
+		<result property="paralogLocation" column="ParalogLocation"/>
+		<result property="fileSize" column="FileSize"/>
+		<result property="geneCount" column="GeneCount"/>
+		<result property="jbrowse" column="JBrowse"/>
+		<result property="source" column="Source"/>
+		<result property="releaseVersion" column="Release_version"/>
+		<result property="releaseDate" column="ReleaseDate"/>
+		<result property="newTaxId" column="new_TaxId"/>
+		<result property="genomeFile" column="genomeFile"/>
+		<result property="cdsFile" column="cdsFile"/>
+		<result property="pepFile" column="pepFile"/>
+		<result property="db" column="db"/>
+	</resultMap>
+	
+	<!-- NCBI의 분류체계에서 현재 선택한 tax_id의 child를 반환해주는 쿼리 -->
+ 	<select id="getAssemblyReport"  parameterType="String" resultMap="AssemblyFilePathMap" >
+	 	SELECT * FROM
+			(select 'refseq' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,AssemblyType,GenBankAssemblyID,ReleaseType, DepositDate, AssemblyLevel,  GeneCount, GenomeRepresentation, GenomicfnaLocation as genomeFile, CDSLocation as cdsFile, ProteinLocation as pepFile, RMoutLocation, FileSize, Source, Release_version, ReleaseDate,
+				case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_RefSeq
+			where new_TaxId=#{newTaxId}
+			
+			union ALL
+		
+			select 'ensembl' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, GenomeRepresentation, TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, RmTopLevelLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+				case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_Ensembl
+			where TaxId=#{newTaxId}
+			
+			union ALL
+			
+			select 'phytozome'as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, '' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+				case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_Phytozome
+			where TaxId=#{newTaxId}
+			
+			union ALL
+			
+			select 'solgenomics' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, '' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+			case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_Solgenomics
+			where TaxId=#{newTaxId}
+			
+			union ALL
+			
+			select 'theothers' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount,'' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+			case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_TheOthers
+			where TaxId=#{newTaxId}
+		)a
+		order by num
+		limit 1
+	</select>
+	
+	<select id="getAssemblyReportExist"  parameterType="String" resultMap="AssemblyFilePathMap" >
+ 	 	<!-- SELECT * FROM AssemblyReport_RefSeq WHERE new_TaxId = #{newTaxId}; -->
+ 	 	SELECT * FROM
+			(select 'ref_seq' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,AssemblyType,GenBankAssemblyID,ReleaseType, DepositDate, AssemblyLevel,  GeneCount, GenomeRepresentation, GenomicfnaLocation as genomeFile, CDSLocation as cdsFile, ProteinLocation as pepFile, RMoutLocation, FileSize, Source, Release_version, ReleaseDate,
+				case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_RefSeq
+			where new_TaxId=#{newTaxId}
+			
+			union ALL
+		
+			select 'ensembl' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, GenomeRepresentation, TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, RmTopLevelLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+				case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_Ensembl
+			where TaxId=#{newTaxId}
+			
+			union ALL
+			
+			select 'rawdata'as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, '' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+				case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_Phytozome
+			where TaxId=#{newTaxId}
+			
+			union ALL
+			
+			select 'rawdata' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, '' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+			case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_Solgenomics
+			where TaxId=#{newTaxId}
+			
+			union ALL
+			
+			select 'rawdata' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount,'' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate,
+			case when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1)) in ('(species-representative latest)','(representative latest)') then 1
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(latest)' then 2
+				when concat('(',SUBSTRING_INDEX(RefSeqAssemblyID,'(',-1))='(suppressed)' then 3
+				else 4
+				end num
+			from AssemblyReport_TheOthers
+			where TaxId=#{newTaxId}
+		)a
+		order by num
+	</select>
+	<select id="getRefseqAssemblyReport"  parameterType="String" resultMap="AssemblyFilePathMap" >
+		SELECT 'refseq' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,AssemblyType,GenBankAssemblyID,ReleaseType, DepositDate, AssemblyLevel,  GeneCount, GenomeRepresentation, GenomicfnaLocation as genomeFile, CDSLocation as cdsFile, ProteinLocation as pepFile, RMoutLocation, FileSize, Source, Release_version, ReleaseDate from AssemblyReport_RefSeq
+		WHERE new_TaxId=#{newTaxId}
+		ORDER BY DepositDate, RefSeqAssemblyID desc
+		LIMIT 1
+	</select>
+	<select id="getEnsemblAssemblyReport"  parameterType="String" resultMap="AssemblyFilePathMap" >
+		SELECT 'ensembl' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, GenomeRepresentation, TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, RmTopLevelLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate from AssemblyReport_Ensembl
+		WHERE TaxId=#{newTaxId}
+		ORDER BY DepositDate, RefSeqAssemblyID desc
+		LIMIT 1
+	</select>
+	<select id="getRawdataAssemblyReport"  parameterType="String" resultMap="AssemblyFilePathMap" >
+		SELECT 'rawdata'as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, '' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate from AssemblyReport_Phytozome
+		WHERE TaxId=#{newTaxId}
+		UNION ALL
+		SELECT 'rawdata' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount, '' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate from AssemblyReport_Solgenomics
+		WHERE TaxId=#{newTaxId}
+		UNION ALL
+		SELECT 'rawdata' as db,TaxId, Organism, RefSeqAssemblyID, AssemblyName,'' as AssemblyType,'' as GenBankAssemblyID,'' as ReleaseType, DepositDate, AssemblyLevel,  GeneCount,'' as 'GenomeRepresentation', TopLevelLocation as 'genomeFile', CDSLocation as cdsFile, ProteinLocation as pepFile, SoftMaskLocation as 'RMoutLocation', FileSize, Source, Release_version, ReleaseDate from AssemblyReport_TheOthers
+		WHERE TaxId=#{newTaxId}
+		ORDER BY DepositDate, RefSeqAssemblyID desc
+		LIMIT 1
+	</select>
+	
+ 	<select id="getChangeAssemblyReport" parameterType="java.util.Map" resultMap="AssemblyResultMap">
+		SELECT * FROM AssemblyReport_RefSeq WHERE new_TaxId = #{newTaxId} AND RefSeqAssemblyID = #{refSeqAssemblyID}
+	</select> 
+</mapper>
